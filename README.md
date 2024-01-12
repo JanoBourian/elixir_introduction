@@ -26,6 +26,7 @@ iex
 
 ```bash
 docker run -it -v /home/ec2-user/environment/elixir_introduction:/app/data --rm elixir bash
+sudo chown -R ec2-user ~/environment/elixir_introduction
 ```
 
 ## First codes
@@ -39,4 +40,19 @@ docker run -it -v /home/ec2-user/environment/elixir_introduction:/app/data --rm 
 
 ```bash
 mix new servy
+mix help
+```
+
+## Magic
+
+To compile all the project and use its functionalities inside the elixir's cls
+
+```bash
+iex -S mix
+```
+
+To recompile certain files (r + module name)
+
+```bash
+r Servy
 ```
