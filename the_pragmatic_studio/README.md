@@ -25,6 +25,7 @@ iex lib/servy.ex
 String.reverse("keep")
 Servy.hello("Francisco")
 Testing.sum_operation(37, 73)
+r Servy
 ```
 
 ```
