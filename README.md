@@ -28,6 +28,7 @@ iex
 docker run -it -v /home/ec2-user/environment/elixir_introduction:/app/data --rm elixir bash
 sudo chown -R ec2-user ~/environment/elixir_introduction
 ```
+When you are using a volume the volume information is in _app/data_
 
 ## First codes
 
