@@ -26,6 +26,7 @@ String.reverse("keep")
 Servy.hello("Francisco")
 Testing.sum_operation(37, 73)
 r Servy
+h String.split/1
 ```
 
 3.- High Level Transformation
@@ -70,8 +71,15 @@ response = Servy.Handler.handle(request)
 
 IO.puts response
 ```
+## 4.- Pattern Matching
 
-```
+```elixir
+iex -S mix
+h String.split/2
+request = Servy.Handler.handle("")
+lines = String.split(request, "\n")
+h List.first
+first_line = Lines.first(lines)
 ```
 
 ```
