@@ -27,9 +27,40 @@ result
 Running elixir
 
 * iex - Interactive Elixir
+
+```elixir
+iex
+IO.puts "Hello, world!"
+String.reverse("Animal")
+```
+
 * IEx Helpers
+
+```elixir
+h
+h(IEx.Helpers)
+exports(IEx.Helpers)
+exports(Kernel)
+h(IO)
+h(IO.puts)
+IO.puts(:stderr, "\nBad Request")
+i 123
+i "cat"
+i %{ name: "Dave", likes: "Elixir"}
+i Map
+h(Map)
+```
+
 * Customizing iex
+
+```elixir
+```
+
 * Compile and run
+
+```elixir
+```
+
 ```bash
 ```
 

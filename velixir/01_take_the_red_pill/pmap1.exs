@@ -7,5 +7,3 @@ defmodule Parallel do
 end
 
 result = Parallel.pmap 1..1000, &(&1 * &1)
-
-result
