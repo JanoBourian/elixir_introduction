@@ -96,7 +96,9 @@ The next matching patterns is going to fail
 [[a]] = [[1, 2, 3]]
 ```
 
-```
+* Ignore a value and variables bind once
+
+```elixir
 ```
 
 ```
