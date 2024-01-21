@@ -54,6 +54,8 @@ h(Map)
 * Customizing iex
 
 ```elixir
+h(IEx.configure)
+IEx.configure colors: [ eval_result: [ :cyan, :bright ]]
 ```
 
 * Compile and run
