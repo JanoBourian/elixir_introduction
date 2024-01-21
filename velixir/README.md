@@ -61,6 +61,8 @@ IEx.configure colors: [ eval_result: [ :cyan, :bright ]]
 * Compile and run
 
 ```elixir
+IO.puts("Hello, world!")
+c "hello.exs"
 ```
 
 ```bash
