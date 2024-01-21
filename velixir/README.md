@@ -99,6 +99,17 @@ The next matching patterns is going to fail
 * Ignore a value and variables bind once
 
 ```elixir
+[1, _, _] = [1, 2, 3]
+[1, _, _] = [1, "cat", "dog"]
+[a, a] = [1, 1]
+[b, b] = [1, 2]
+a = 1
+a = 2
+^a = 1 # Error
+a = 1
+[^a, 2, 3] = [1, 2, 3]
+a = 2
+[^a, 2] = [1, 2]
 ```
 
 ```
