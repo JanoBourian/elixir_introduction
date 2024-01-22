@@ -112,7 +112,15 @@ a = 2
 [^a, 2] = [1, 2]
 ```
 
-```
+# Immutability
+
+```elixir
+list1 = [3, 2, 1]
+list2 = [ 4 | list1]
+name = "elixir"
+cap_name = String.capitalize(name)
+name
+cap_name
 ```
 
 ```
