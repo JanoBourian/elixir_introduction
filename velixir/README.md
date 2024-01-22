@@ -123,6 +123,119 @@ name
 cap_name
 ```
 
+# Elixir Basics
+
+* Value types
+    - Integers
+    - Floating-point numbers
+    - Atoms
+    - Ranges
+    - Regular Expressions
+    
+```elixir
+Regex.run(~r{[aeiou]}, "caterpillar")
+Regex.scan(~r{[aeiou]}, "caterpillar")
+Regex.split(~r{[aeiou]}, "caterpillar")
+Regex.replace(~r{[aeiou]}, "caterpillar", "*")
+```
+* System types
+    - PIDs and ports
+    - References
+* Collection types
+    - Tuples
+```elixir
+tuple_1 = { 1, 2}
+tuple_2 = { :ok, 42, "next"}
+tuple_3 = { :error, :enoent}
+{status, count, action} = tuple_2
+status
+
+# Another example
+{status, _} = File.open("mix.exs")
+IO.puts(status)
+
+{status, _} = File.open("non-existent-file.exs")
+IO.puts(status)
+```
+    - Lists
+```elixir
+[1, 2, 3] ++ [4, 5, 6] #concatenation
+[1, 2, 3, 4, 5] -- [2, 3, 5] #difference
+1 in [1, 2, 3]
+"wombat" in [1, 2, 3]
+
+# keywords lists
+list1 = [ name: "Dave", city: "Dallas", likes: "Programming"]
+list2 = [ {:name, "Dave"}, {:city, "Dallas"}, {:likes, "Programming"}]
+list1 = list2
+
+# leave off square brackets
+DB.save(record,[{:use_transaction, true}, {:logging, "HIGH"}])
+DB.save record, [{:use_transaction, true}, {:logging, "HIGH"}]
+DB.save record, use_transaction: true, logging: "HIGH"
+
+# leave off the brackets
+[1, fred: 1, dave: 2]
+{1, fred: 1, dave: 2}
+```
+    - Maps
+```
+```
+    - Binaries
+```
+```
+    - Dates and times
+```
+```
+    - Names, Source Files, Conventions, Operators and So On
+```
+```
+    - Variable Scope
+```
+```
+    - End of the basics
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
 ```
 ```
 
