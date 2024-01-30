@@ -209,8 +209,30 @@ bin = <<3 :: size(2), 5 :: size(4), 1 :: size(2)>>
 :io.format("~-8.2b~n", :binary.bin_to_list(bin))
 byte_size bin
 ```
-    - Dates and times
-```
+    - Dates and times: Calendar.ISO, 
+      the ISO-8601 representation of the Gregorian calendar
+```elixir
+d1 = Date.new(2018, 12, 25)
+{:ok, ~D[2018-12-25]} = Date.new(2018, 12, 25)
+d2 = ~D[2018-12-25]
+Date.day_of_week(d2)
+Date.add(d2, 7)
+inspect d1, structs: false
+
+# range of dates
+d1 = ~D[2018-01-01]
+d2 = ~D[2018-06-30]
+first_half = Date.range(d1, d2)
+Enum.count(first_half)
+~D[2018-03-15] in first_half
+
+# Time type
+{:ok, t1} = Time.new(12, 34, 56)
+t2 = ~T[12:34:56.78]
+t1 == t2
+Time.add(t1, 3600)
+Time.add(t1, 3600, :millisecond)
+Time.add(t1, 3, :hour)
 ```
     - Names, Source Files, Conventions, Operators and So On
 ```
