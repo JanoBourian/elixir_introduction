@@ -235,7 +235,49 @@ Time.add(t1, 3600, :millisecond)
 Time.add(t1, 3, :hour)
 ```
     - Names, Source Files, Conventions, Operators and So On
-```
+```elixir
+# strict equality
+1 === 1.0 # false
+
+# strict inequality
+1 !== 1.0 #true
+
+# value equality
+1 == 1.0 # true
+
+# value inequality
+1 != 1.0 # false
+
+# normal comparison
+a > b
+a >= b
+a < b
+a <= b
+
+# Rule for comparison
+# number < atom < reference < function < port < pid < tuple < map < list < binary
+
+# Boolean operators (these expect true or false as their first argument)
+a or b # true if a is true; otherwise b
+a and b # false if a is false; otherwise b
+not a # false if a is true; true otherwise
+
+# Relaxed Boolean operators (These operators take arguments of any type)
+a || b # a if a is truthy; otherwise b
+a && b # b if a is truthy; otherwise a
+!a # false if a is truthy
+
+# Arithmetic operators
++-*/ div rem
+
+# join operators
+binary <> binary
+list1 ++ list2
+list1 -- list2
+
+# the in operator
+a in enum
+
 ```
     - Variable Scope
 ```
