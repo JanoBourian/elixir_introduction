@@ -280,9 +280,11 @@ a in enum
 
 ```
     - Variable Scope
+```elixir
+# If you use <- instead of = in a with expression, it permforms a match, but if
+# it fails it returns the value that could not be matched
 ```
-```
-    - End of the basics
+
 ```
 ```
 
