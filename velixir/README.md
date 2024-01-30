@@ -157,7 +157,7 @@ IO.puts(status)
 {status, _} = File.open("non-existent-file.exs")
 IO.puts(status)
 ```
-    - Lists
+    * Lists
 ```elixir
 [1, 2, 3] ++ [4, 5, 6] #concatenation
 [1, 2, 3, 4, 5] -- [2, 3, 5] #difference
@@ -179,7 +179,27 @@ DB.save record, use_transaction: true, logging: "HIGH"
 {1, fred: 1, dave: 2}
 ```
     - Maps
-```
+```elixir
+# Template for a Map
+%{ key => value, key => value}
+
+# Keys are strings
+states = %{ "AL" => "Alabama", "WI" => "Wisconsin"}
+
+# Keys are tuples
+responses = %{ {:error,:enoent} => :fatal, {:error, :busy} => :fatal} 
+
+# Keys are atoms
+colors = %{ :red => 0xff0000, :green => 0x00ff00, :blue => 0x0000ff}
+
+# Keys are mix
+%{ "one" => 1, :two => 2, {1,1,1} => 3}
+
+# Accessing a Map
+states["AL"]
+states["TX"]
+colors[:red]
+colors.red
 ```
     - Binaries
 ```
