@@ -96,6 +96,36 @@ h List.first
 first_line = Lines.first(lines)
 ```
 
+## 5.- Immutable data
+
+```
+```
+
+## 6.- Function clauses
+
+```
+```
+
+## 7.- Advanced pattern matching
+
+```
+```
+
+## 8.- Pattern matching maps
+
+```
+```
+
+## 9.- Serving Files
+
+```
+```
+
+## 10.- Module Attributes
+
+```
+```
+
 ```
 ```
 
