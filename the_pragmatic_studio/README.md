@@ -1,3 +1,10 @@
+# 1.- Previous
+
+```bash
+docker run -it -v /home/ec2-user/environment/elixir_introduction:/app/data --rm elixir bash
+docker run -it --rm elixir bash
+```
+
 # 2.- Create Mix Project
 
 Basic steps to create, edit and run an elixir project.
