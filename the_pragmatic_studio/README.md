@@ -22,7 +22,10 @@ Information:
 * mix.exs is the configuration file for our dependencies and requirements
 * .exs: such as scripts
 * .ex: compiled files
-* to execute a script _elixir/lib/servy.ex_ 
+* to execute a script 
+```bash
+elixir lib/servy.ex
+```
 
 If you want to have available your scripts in the interactive shell you can code:
 
@@ -38,6 +41,9 @@ h String.split/1
 ```
 
 3.- High Level Transformation
+
+The convention is to create a new modules inside of _/lib_ with the name of the
+project (in this case _/servy_)
 
 ```elixir
 defmodule Servy.Handler do
