@@ -3,6 +3,7 @@
 ```bash
 docker run -it -v /home/ec2-user/environment/elixir_introduction:/app/data --rm elixir bash
 docker run -it --rm elixir bash
+sudo chown -R ec2-user ~/environment
 ```
 
 # 2.- Create Mix Project
