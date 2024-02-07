@@ -96,6 +96,27 @@ h List.first
 first_line = Lines.first(lines)
 ```
 
+h String. + tab to show the functions in String module
+
+```elixir
+request = """
+GET /wildthings HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+String.split("1,2,3", ",")
+String.split("1,2,3", parts: 2)
+String.split("1 2 3", " ", trim:true)
+lines = String.split(request, "\n")
+first_line = List.first(lines)
+first_line = request |> String.split("\n") |> List.first
+parts = String.split(first_line, " ")
+Enum.at(parts, 0)
+```
+
+
 ## 5.- Immutable data
 
 ```
