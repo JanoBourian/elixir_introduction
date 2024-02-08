@@ -119,7 +119,18 @@ Enum.at(parts, 0)
 
 ## 5.- Immutable data
 
-```
+```elixir
+conv = %{ method: "GET", path: "/wildthings", resp_body: "Bears, Lions, Tigers"}
+conv[:method]
+conv[:path]
+conv[:resp_body]
+conv[:mike]
+conv[:resp_body] = "Bear"
+h Map.put
+new_conv = Map.put(conv, :resp_body, "Bears")
+conv = % { conv | resp_body: "Bears, Lions, Tigers"}
+String.length(conv.resp_body)
+conv.resp_body
 ```
 
 ## 6.- Function clauses

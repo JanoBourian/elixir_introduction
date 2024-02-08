@@ -7,25 +7,25 @@ defmodule Servy.Handler do
     end
     
     def parse(request) do
-        [method, path, resp_body] = 
+        [method, path, _] = 
             request 
             |> String.split("\n") 
             |> List.first 
             |> String.split(" ")
-        %{ method: method, path: path, resp_body: resp_body}
+        %{ method: method, path: path, resp_body: ""}
     end
     
     def route(conv) do
-        conv = %{ method: "GET", path: "/wildthings", resp_body: "Bears, Lions, Tigers"}
+        %{ conv | resp_body: "Bears, Lions, Tigers"}
     end
     
     def format_response(conv) do
         """
         HTTP/1.1 200 OK
         Content-Type: text/html
-        Content-Length: 20
+        Content-Length: #{String.length(conv.resp_body)}
 
-        Bears, Lions, Tigers
+        #{conv.resp_body}
         """
     end
 end
