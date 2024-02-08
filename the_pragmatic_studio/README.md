@@ -85,6 +85,7 @@ response = Servy.Handler.handle(request)
 
 IO.puts response
 ```
+
 ## 4.- Pattern Matching
 
 ```elixir
@@ -135,7 +136,46 @@ conv.resp_body
 
 ## 6.- Function clauses
 
+One line function
+
+```elixir
+def log(conv), do: IO.inspect conv
 ```
+
+instead of
+
+```elixir
+def log(conv) do
+    IO.inspect conv
+end
+```
+
+if-else statement
+
+```elixir
+if conv.path == "/wildthings" do
+    %{ conv | resp_body: "Bears, Lions, Tigers"}
+else
+    %{ conv | resp_body: "Teddy, Smokey, Paddington"}
+end
+```
+
+Good way to avoid if-else (instead of use that stament you can redirect the flux)
+
+```elixir
+    def log(conv), do: IO.inspect conv
+    
+    def route(conv) do
+        route(conv, conv.method, conv.path)
+    end
+    
+    def route(conv, "GET", "/wildthings") do
+        %{ conv | resp_body: "Bears, Lions, Tigers"}
+    end
+    
+    def route(conv, "GET", "/bears") do
+        %{ conv | resp_body: "Teddy, Smokey, Paddington"}
+    end
 ```
 
 ## 7.- Advanced pattern matching
