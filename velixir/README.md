@@ -317,16 +317,86 @@ iex mm/times.exs
 c "mm/times.exs"
 ```
 
-```
-```
-
-```
-```
-
-```
+One line function
+```elixir
+def double(n), do: n*2
 ```
 
+Functions calls and pattern matching
+```elixir
+defmodule Factorial do
+    def of(0), do: 1
+    def of(n), do: n*of(n-1)
+end
 ```
+
+## Guard clauses
+```elixir
+defmodule Guard do
+    def what_is(x) when is_number(x) do
+        IO.puts "#{x} is a number."
+    end
+    
+    def what_is(x) when is_list(x) do
+        IO.puts "#{inspect(x)} is a list."
+    end
+    
+    def what_is(x) when is_atom(x) do
+        IO.puts "#{x} is an atom."
+    end
+end
+```
+
+For the *when* clause you can use the next Type-check functions:
+- is_atom
+- is_binary
+- is_bitstring
+- is_boolean
+- is_exception
+- is_float
+- is_function
+- is_integer
+- is_list
+- is_map
+- is_number
+- is_pid
+- is_port
+- is_record
+- is_reference
+- is_tuple
+- 
+
+and another kind of functions:
+- abs(number)
+- bit_size(bitstring)
+- byte_size(bitstring)
+- div(number, number)
+- elem(tuple, n)
+- float(term)
+- hd(list)
+- length(list)
+- node()
+- node(pid|reflport)
+- rem(number, number)
+- round(number)
+- self()
+- tl(list)
+- trunc(number)
+- tuple_size(tuple)
+
+## Default parameters
+
+```elixir
+defmodule Example do
+    def fun(p1, p2 \\ 2, p3 \\ 3, p4) do
+        IO.inspect [p1, p2, p3, p4]
+    end
+end
+
+## some use cases
+Example.fun(1, 4) # [1, 2, 3, 4]
+Example.fun("a", "b") # ["a", 2, 3, "b"]
+Example.fun("a", "b", "c") # ["a", "c", 3, "b"]
 ```
 
 ```
