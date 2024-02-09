@@ -285,13 +285,36 @@ a in enum
 # it fails it returns the value that could not be matched
 ```
 
-```
+# Anonymous Functions
+
+```elixir
+sum = fn (a,b) -> a + b end
+sum.(1,2)
+greet = fn -> IO.puts "hello" end
+greet.()
+f1 = fn a, b -> a*b end
+f1.(2,3)
+swap = fn {a, b} -> {b, a} end
+swap.({"Hello", "Goodbye"})
 ```
 
-```
+# Modules and named functions
+
+```elixir
+defmodule Times do
+    def double(n) do
+        n*2
+    end
+    
+    def double(a, b) do
+        a * b
+    end
+end
 ```
 
-```
+```bash
+iex mm/times.exs
+c "mm/times.exs"
 ```
 
 ```
