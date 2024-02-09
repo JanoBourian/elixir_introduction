@@ -396,7 +396,7 @@ end
 ## some use cases
 Example.fun(1, 4) # [1, 2, 3, 4]
 Example.fun("a", "b") # ["a", 2, 3, "b"]
-Example.fun("a", "b", "c") # ["a", "c", 3, "b"]
+Example.fun("a", "b", "c") # ["a", "b", 3, "c"]
 ```
 
 ```
