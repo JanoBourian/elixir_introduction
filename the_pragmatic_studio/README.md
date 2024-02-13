@@ -406,7 +406,69 @@ end
 
 ## 9.- Serving Files
 
+```elixir
+h File.read/1
+{:ok, contents } = File.read("pages/about.html")
+contents
+{:error, reason} = File.read("pages/about_us.html")
+reason
 ```
+
+Correct way to read the file using one dot
+
+```elixir
+    def route(%{ method: "GET", path: "/about"} = conv) do
+        case File.read("././pages/about.html") do
+            {:ok, content} -> 
+                %{ conv | status: 200, resp_body: content}
+            {:error, :enoent} -> 
+                %{ conv | status: 404, resp_body: "File not found!"}
+            {:error, reason} -> 
+                %{ conv | status: 500, resp_body: "File error: #{reason}"}
+        end
+    end
+```
+
+Other correct way to read files using absolut path
+
+```elixir
+    def route(%{ method: "GET", path: "/about"} = conv) do
+        file =
+            Path.expand("../../pages", __DIR__)
+            |> Path.join("about.html")
+        case File.read(file) do
+            {:ok, content} -> 
+                %{ conv | status: 200, resp_body: content}
+            {:error, :enoent} -> 
+                %{ conv | status: 404, resp_body: "File not found!"}
+            {:error, reason} -> 
+                %{ conv | status: 500, resp_body: "File error: #{reason}"}
+        end
+    end
+```
+
+Multiclass functions
+
+```elixir
+    def route(%{ method: "GET", path: "/about"} = conv) do
+        Path.expand("../../pages", __DIR__)
+        |> Path.join("about.html")
+        |> File.read
+        |> handle_file(conv)
+        
+    end
+    
+    def handle_file({:ok, content}, conv) do
+        %{ conv | status: 200, resp_body: content}
+    end
+    
+    def handle_file({:error, :enoent}, conv) do
+        %{ conv | status: 404, resp_body: "File not found!"}
+    end
+    
+    def handle_file({:error, reason}, conv) do
+        %{ conv | status: 500, resp_body: "File error: #{reason}"}
+    end
 ```
 
 ## 10.- Module Attributes
