@@ -473,7 +473,14 @@ Multiclass functions
 
 ## 10.- Module Attributes
 
-```
+Modules attributes for documents and constants
+
+```elixir
+@moduledoc "Handles HTTP request."
+
+@pages_path Path.expand("../../pages", __DIR__)
+
+@doc "Transform the request into a response."
 ```
 
 ```
