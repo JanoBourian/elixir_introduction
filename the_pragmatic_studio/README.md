@@ -483,14 +483,22 @@ Modules attributes for documents and constants
 @doc "Transform the request into a response."
 ```
 
-```
-```
+## 11.- Organizing Code
 
 ```
 ```
 
+## 12.- Modeling with structs
+
 ```
 ```
+
+## 13.- Matching Heads and Tails
+
+```
+```
+
+## 14.- Recursion
 
 ```
 ```
