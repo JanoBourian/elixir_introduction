@@ -1,6 +1,6 @@
 # Programming elixir >= 1.6
 
-## Take the red pill
+# Take the red pill
 
 A fast way to access the files
 
@@ -40,17 +40,18 @@ String.reverse("Animal")
 
 ```elixir
 h
-h(IEx.Helpers)
-exports(IEx.Helpers)
+h(IEx.Helpers) # to get information
+exports(IEx.Helpers) # to list all IEx helpers
 exports(Kernel)
 h(IO)
 h(IO.puts)
 IO.puts(:stderr, "\nBad Request")
-i 123
+i 123 # to introspect any value
 i "cat"
 i %{ name: "Dave", likes: "Elixir"}
 i Map
 h(Map)
+Map.module_info() # to access metadata
 ```
 
 * Customizing iex
@@ -67,7 +68,7 @@ IO.puts("Hello, world!")
 c "hello.exs"
 ```
 
-## Pattern matching
+# Pattern matching
 
 ```elixir
 a = 1
@@ -89,7 +90,7 @@ b
 c
 ```
 
-The next matching patterns is going to fail
+The next matching pattern is going to fail
 
 ```elixir
 [a, b] = [1, 2, 3]
