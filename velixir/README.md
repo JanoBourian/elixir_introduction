@@ -299,6 +299,84 @@ swap = fn {a, b} -> {b, a} end
 swap.({"Hello", "Goodbye"})
 ```
 
+```elixir
+# Exercise: Functions-1
+list_concat = fn ([a, b], [c, d]) -> [a, b, c, d] end
+list_concat.([2, 3], [5, 7])
+sum = fn a, b, c -> a + b + c end
+sum.(1, 2, 3)
+pair_tuple_to_list = fn {a, b} -> [a, b] end
+pair_tuple_to_list.({1234, 5678})
+```
+
+## One function, multiple bodies
+
+```elixir
+function_2 = fn
+    0, 0, _ -> "FizzBuzz"
+    0, _, _ -> "Fizz"
+    _, 0, _ -> "Buzz"
+    _, _, c -> c
+end
+
+IO.puts function_2.(0, 0, 3)
+IO.puts function_2.(0, 1, 3)
+IO.puts function_2.(1, 0, 3)
+IO.puts function_2.(1, 2, 3)
+```
+
+## Functions can return functions
+
+```elixir
+greeter = fn name -> (fn -> "Hello #{name}" end) end
+dave_greeter = greeter.("Dave")
+IO.puts dave_greeter.()
+
+add_n = fn n -> (fn other -> n + other end) end
+add_two = add_n.(2)
+add_five = add_n.(5)
+IO.puts add_two.(3)
+IO.puts add_five.(7)
+
+prefix = fn str_1 -> (fn str_2 -> IO.puts str_1 <> " " <> str_2 end) end
+mrs = prefix.("Mrs")
+mrs.("Smith")
+prefix.("Elixir").("Rocks")
+```
+
+## Passing Functions as arguments
+```elixir
+defmodule Greeter do
+    def for(name, greeting) do
+        fn
+            (^name) -> "#{greeting}, #{name}"
+            (_) -> "I don't know you"
+        end
+    end
+end
+
+mr_valim = Greeter.for("José", "Oi!")
+IO.puts mr_valim.("José")
+IO.puts mr_valim.("David")
+```
+
+### Shorcuts
+```elixir
+mr_valim = Greeter.for("José", "Oi!")
+IO.puts mr_valim.("José")
+IO.puts mr_valim.("David")
+
+add_one = &(&1 + 1)
+IO.puts add_one.(7)
+square = &(&1 * &1)
+IO.puts square.(73)
+speak = &(IO.puts &1)
+speak.("Hello")
+
+divrem = &{div(&1, &2), rem(&1, &2)}
+IO.inspect divrem.(13, 5)
+```
+
 # Modules and named functions
 
 ```elixir
