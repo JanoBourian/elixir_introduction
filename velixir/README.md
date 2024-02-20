@@ -531,7 +531,19 @@ defmodule Example do
 end
 ```
 
-```
+# List and recursion
+
+## Heads and Tails
+
+```elixir
+[3 | []]
+[2 | [3 | []]]
+[1 | [2 | [3 | []]]]
+[a, b, c] = [1, 2, 3]
+[head | tail] = [1, 2, 3]
+head
+tail
+[99, 97, 116]
 ```
 
 ```
