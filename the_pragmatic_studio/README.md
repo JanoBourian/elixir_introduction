@@ -36,7 +36,8 @@ Information:
 * mix.exs is the configuration file for our dependencies and requirements
 * .exs: such as scripts
 * .ex: compiled files
-* to execute a script 
+* to execute a script
+
 ```bash
 elixir lib/servy.ex
 ```
