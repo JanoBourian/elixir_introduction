@@ -379,6 +379,14 @@ IO.inspect divrem.(13, 5)
 
 # Modules and named functions
 
+Operations with *iex* console
+
+```elixir
+iex definition/mm/times.exs
+# to compile with documentation
+c("definition/mm/times.exs", ".") 
+```
+
 ```elixir
 defmodule Times do
     def double(n) do
@@ -476,6 +484,96 @@ end
 Example.fun(1, 4) # [1, 2, 3, 4]
 Example.fun("a", "b") # ["a", 2, 3, "b"]
 Example.fun("a", "b", "c") # ["a", "b", 3, "c"]
+```
+
+## The Amazing Pipe Operator
+
+```elixir
+defmodule Pipe do
+    def operation(range) do
+        range 
+        |> Enum.map(&(&1*&1))
+        |> Enum.filter(&(&1 < 40))
+    end
+end
+
+IO.inspect Pipe.operation(1..10)
+```
+
+## The import Directive
+
+We can use *import Module [, only:|except: ]
+
+```elixir
+defmodule FlattenExample do
+    def func(list) do
+        import List, only: [flatten: 1]
+        flatten(list)
+    end
+end
+
+IO.inspect FlattenExample.func([1, [2,3, [4, 5], 6, 7] , 8])
+```
+
+## The alias Directive
+
+```elixir
+defmodule Example do
+    def compile_and_go(source) do
+        import List, only: [flatten: 1]
+        alias My.Other.Module.Parser, as: Parser
+        alias My.Other.Module.Runner, as: Runner
+        # alias My.Other.Module.{Parser,}
+        source
+        |> Parser.parse()
+        |> Runner.execute()
+    end
+end
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
 ```
 
 ```
