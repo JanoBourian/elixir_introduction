@@ -6,6 +6,20 @@ docker run -it --rm elixir bash
 sudo chown -R ec2-user ~/environment
 ```
 
+```elixir
+defmodule Servy do
+    def handle(request) do
+        request
+        |> parse()
+        |> rewrite_path()
+        |> log()
+        |> route()
+        |> track()
+        |> response()
+    end
+end
+```
+
 # 2.- Create Mix Project
 
 Basic steps to create, edit and run an elixir project.
