@@ -509,7 +509,86 @@ Modules attributes for documents and constants
 
 ## 11.- Organizing Code
 
+Using only module separation
+
+```elixir
+defmodule Replica.Plugins do
+
+    def rewrite_path(%{ path: "/wildlife"} = conv) do
+        %{ conv | path: "/wildthings" }
+    end
+    
+    def rewrite_path(conv), do: conv
+    
+    def log(conv), do: IO.inspect conv
+    
+    def track(%{ status: 404 } = conv) do
+        IO.puts "Warning: #{conv.path} is on the loose!"
+        conv
+    end
+    
+    def track(conv), do: conv
+    
+end 
+
+defmodule Replica.Handler do
+    @moduledoc "Handles HTTP requests."
+    
+    @pages_path Path.expand("../../pages", __DIR__)
+    
+    @doc "Transform the request into a response."
+    def handle(request) do
+        request
+        |> parse()
+        |> Replica.Plugins.rewrite_path()
+        |> Replica.Plugins.log()
+        |> route()
+        |> Replica.Plugins.track()
+        |> format_response()
+    end
+end
 ```
+
+Importing modules
+
+```elixir
+    import Replica.Plugins, only: [rewrite_path:1, log:1, track:1]
+    
+    @doc "Transform the request into a response."
+    def handle(request) do
+        request
+        |> parse()
+        |> rewrite_path()
+        |> log()
+        |> route()
+        |> track()
+        |> format_response()
+    end
+```
+
+```elixir
+defmodule Replica.Parser do
+    def parse(request) do
+        # TODO: Parse the request string into a map
+        [method, path, _] = 
+            request
+            |> String.split("\n")
+            |> List.first()
+            |> String.split(" ")
+        
+        %{ method: method, 
+            path: path, 
+            resp_body: "",
+            status: nil
+        }
+    end
+end
+```
+
+```elixir
+iex -S mix
+r Replica.Handler
+recompile
 ```
 
 ## 12.- Modeling with structs
