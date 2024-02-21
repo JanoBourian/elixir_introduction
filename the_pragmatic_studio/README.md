@@ -689,7 +689,9 @@ Remember this useful operation
 URI.decode_query("name=Baloo&type=Brown")
 ```
 
-```
+and we will use the [heads | tails] pattern:
+```elixir
+[heads | tails] = [1, 2, 3, 4, 5, 6]
 ```
 
 ## 14.- Recursion
