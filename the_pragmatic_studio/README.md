@@ -723,13 +723,16 @@ IO.puts Factorial.fun("500")
 IO.puts Factorial.fun(%{ method: "POST"})
 ```
 
+## 15.- Slicing and dicing with Enum - Part 1
 ```elixir
 ```
 
-```
+## 15.- Slicing and dicing with Enum - Part 2
+```elixir
 ```
 
-```
+## 16.- Comprehensions
+```elixir
 ```
 
 ```
