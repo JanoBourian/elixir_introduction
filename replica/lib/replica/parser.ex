@@ -1,4 +1,7 @@
 defmodule Replica.Parser do
+
+    alias Replica.Conv, as: Conv
+    
     def parse(request) do
         # TODO: Parse the request string into a map
         [method, path, _] = 
@@ -7,10 +10,9 @@ defmodule Replica.Parser do
             |> List.first()
             |> String.split(" ")
         
-        %{ method: method, 
-            path: path, 
-            resp_body: "",
-            status: nil
+        %Conv{ 
+            method: method, 
+            path: path
         }
     end
 end

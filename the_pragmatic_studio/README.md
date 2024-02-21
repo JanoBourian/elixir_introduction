@@ -593,7 +593,93 @@ recompile
 
 ## 12.- Modeling with structs
 
+We can define a struct and we can use it to generate a structure like a map
+```elixir
+defmodule Replica.Conv do
+    defstruct [ method: "", path: "", resp_body: "", status: nil ]
+end
 ```
+
+Structs are a Map, but Map is not a struct
+
+```elixir
+iex -S mix
+map = %{}
+conv = %Replica.Conv{}
+conv = %Replica.Conv{ method: "GET", path: "/bears" }
+conv.method
+conv.path
+conv[:age] # error
+conv = %{ conv | status: 200 }
+%Replica.Conv{ method: method } = conv
+method
+is_map(conv) # true
+```
+
+Working directly
+```elixir
+defmodule Replica.Parser do
+    def parse(request) do
+        # TODO: Parse the request string into a map
+        [method, path, _] = 
+            request
+            |> String.split("\n")
+            |> List.first()
+            |> String.split(" ")
+        
+        %Replica.Conv{ 
+            method: method, 
+            path: path
+        }
+    end
+end
+```
+
+Working with alias
+```elixir
+defmodule Replica.Parser do
+
+    alias Replica.Conv, as: Conv
+    
+    def parse(request) do
+        # TODO: Parse the request string into a map
+        [method, path, _] = 
+            request
+            |> String.split("\n")
+            |> List.first()
+            |> String.split(" ")
+        
+        %{ 
+            method: method, 
+            path: path
+        }
+    end
+end
+```
+
+We can ensure that you get a struct with the Conv struct
+
+```elixir
+defmodule Replica.Plugins do
+
+    alias Replica.Conv
+
+    def rewrite_path(%Conv{ path: "/wildlife"} = conv) do
+        %{ conv | path: "/wildthings" }
+    end
+    
+    def rewrite_path(%Conv{} = conv), do: conv
+    
+    def log(conv), do: IO.inspect conv
+    
+    def track(%Conv{ status: 404, path: path } = conv) do
+        IO.puts "Warning: #{path} is on the loose!"
+        conv
+    end
+    
+    def track(%Conv{} = conv), do: conv
+    
+end 
 ```
 
 ## 13.- Matching Heads and Tails
