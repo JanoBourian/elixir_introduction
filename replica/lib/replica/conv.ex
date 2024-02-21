@@ -4,7 +4,8 @@ defmodule Replica.Conv do
                 path: "", 
                 resp_body: "", 
                 status: nil, 
-                params: nil 
+                params: %{},
+                headers: %{}
             ]
     
     def full_status(conv) do
