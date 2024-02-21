@@ -32,6 +32,13 @@ defmodule Replica.Handler do
     
     def log(conv), do: IO.inspect conv
     
+    def route(%{ method: "GET", path: "/about"} = conv) do
+        Path.expand("../../pages", __DIR__)
+        |> Path.join("about.html")
+        |> File.read()
+        |> handle_file(conv)
+    end
+    
     def route(%{ method: "GET", path: "/wildthings"} = conv) do
         %{ conv | status: 200, resp_body: "Bears, Lions, Tigers" }
     end
@@ -75,6 +82,18 @@ defmodule Replica.Handler do
             404 => "Not Found",
             500 => "Internal Server Error"
         }[code]
+    end
+    
+    defp handle_file({:ok, content}, conv) do
+        %{ conv | status: 200, resp_body: content }
+    end
+    
+    defp handle_file({:error, :enoent}, conv) do
+        %{ conv | status: 404, resp_body: "File not found!" }
+    end
+    
+    defp handle_file({:error, reason}, conv) do
+        %{ conv | status: 500, resp_body: "File error: #{reason}" }
     end
 end
 
@@ -130,6 +149,16 @@ IO.puts Replica.Handler.handle(request)
 
 request = """
 GET /wildlife HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+
+IO.puts Replica.Handler.handle(request)
+
+request = """
+GET /about HTTP/1.1
 Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*

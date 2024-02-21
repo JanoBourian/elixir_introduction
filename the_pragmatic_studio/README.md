@@ -429,6 +429,15 @@ contents
 reason
 ```
 
+Case example
+```elixir
+case <evaluation> do
+    <case_1> -> <do_that>
+    <case_2> -> <do_that>
+    <case_3> -> <do_that>
+end
+```
+
 Correct way to read the file using one dot
 
 ```elixir
