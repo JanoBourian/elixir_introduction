@@ -684,6 +684,11 @@ end
 
 ## 13.- Matching Heads and Tails
 
+Remember this useful operation
+```elixir
+URI.decode_query("name=Baloo&type=Brown")
+```
+
 ```
 ```
 

@@ -1,5 +1,11 @@
 defmodule Replica.Conv do
-    defstruct [ method: "", path: "", resp_body: "", status: nil ]
+    defstruct [ 
+                method: "", 
+                path: "", 
+                resp_body: "", 
+                status: nil, 
+                params: nil 
+            ]
     
     def full_status(conv) do
         "#{conv.status} #{status_reason(conv.status)}"
