@@ -3,6 +3,9 @@ defmodule Janobourian.Handler do
   Documentation for Janobourian.Handler
   """
 
+  @pages_path Path.expand("../../pages", __DIR__)
+  @about_html "about.html"
+
   @doc"""
   Documentation for handler function
   """
@@ -42,6 +45,13 @@ defmodule Janobourian.Handler do
   def rewrite_path(conv), do: conv
 
   def log(conv), do: IO.inspect conv
+
+  def route(%{ method: "GET", path: "/about"} = conv) do
+    @pages_path
+    |> Path.join(@about_html)
+    |> File.read()
+    |> handle_file(conv)
+  end
 
   def route(%{ method: "GET", path: "/wildthings"} = conv) do
     %{ conv | status: 200, resp_body: "Bears, Lions, Tigers"}
@@ -92,6 +102,18 @@ defmodule Janobourian.Handler do
         404 => "Not Found",
         500 => "Internal Server Error"
     }[code]
+end
+
+defp handle_file({ :ok, content}, conv) do
+  %{ conv | status: 200, resp_body: content}
+end
+
+defp handle_file({ :error, :enoent}, conv) do
+  %{ conv | status: 404, resp_body: "File not found"}
+end
+
+defp handle_file({ :error, reason}, conv) do
+  %{ conv | status: 500, resp_body: "File error: #{reason}"}
 end
 
 end
@@ -152,6 +174,15 @@ IO.puts Janobourian.Handler.handle(request)
 
 request = """
 GET /unprocessable HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request = """
+GET /about HTTP/1.1
 Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
