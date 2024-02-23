@@ -750,6 +750,39 @@ IO.puts Factorial.fun("500")
 IO.puts Factorial.fun(%{ method: "POST"})
 ```
 
+Now we can manage more complex request as the next:
+
+```elixir
+request = """
+POST /bears HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+Content-Type: multipart/form-data
+Content-Length: 21
+
+name=Baloo&type=Brown
+"""
+IO.puts Janobourian.Handler.handle(request)
+```
+
+We should add a new method to handle the POST request in /bears
+
+```elixir
+  def route(%Conv{ method: "POST", path: "/bears"} = conv) do
+    %{ conv | status: 200, resp_body: "POST Method"}
+  end
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
 ## 15.- Slicing and dicing with Enum - Part 1
 ```elixir
 ```

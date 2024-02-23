@@ -6,7 +6,7 @@ defmodule Janobourian.Handler do
   @about_html "about.html"
 
   import Janobourian.Plugins, only: [rewrite_path: 1, log: 1, track: 1]
-  import Janobourian.Parse, only: [parse: 1]
+  import Janobourian.Parser, only: [parse: 1]
 
   alias Janobourian.Conv
 
@@ -32,6 +32,10 @@ defmodule Janobourian.Handler do
 
   def route(%Conv{ method: "GET", path: "/wildthings"} = conv) do
     %{ conv | status: 200, resp_body: "Bears, Lions, Tigers"}
+  end
+
+  def route(%Conv{ method: "POST", path: "/bears"} = conv) do
+    %{ conv | status: 200, resp_body: "Created a #{conv.params["type"]} bear named #{conv.params["name"]}"}
   end
 
   def route(%Conv{ method: "GET", path: "/bears"} = conv) do
@@ -154,5 +158,28 @@ Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
 
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request= """
+POST /bears HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+
+name=Teddy&type=Brown
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request = """
+POST /bears HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 21
+
+name=Baloo&type=Brown
 """
 IO.puts Janobourian.Handler.handle(request)

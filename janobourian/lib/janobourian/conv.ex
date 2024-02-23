@@ -3,6 +3,8 @@ defmodule Janobourian.Conv do
     method: "",
     path: "",
     resp_body: "",
-    status: nil
+    status: nil,
+    params: %{},
+    headers: %{}
   ]
 end
