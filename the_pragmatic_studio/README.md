@@ -165,6 +165,17 @@ String.length(conv.resp_body)
 conv.resp_body
 ```
 
+We will change route function:
+```elixir
+  @doc"""
+  Documentation for route
+  """
+  def route(conv) do
+    # TODO: Create a new map that also has the response body
+    %{ conv | response_body: "Bears, Lions, Tigers"}
+  end
+```
+
 ## 6.- Function clauses
 
 One line function

@@ -24,7 +24,12 @@ defmodule Janobourian.Handler do
       |> List.first()
       |> String.split(" ")
 
-    %{method: method, path: path, resp_body: ""}
+    %{
+      method: method,
+      path: path,
+      resp_body: "",
+      status: nil
+    }
   end
 
   @doc"""
@@ -32,7 +37,7 @@ defmodule Janobourian.Handler do
   """
   def route(conv) do
     # TODO: Create a new map that also has the response body
-    conv = %{method: "GET", path: "/wildthings", resp_body: "Bears, Lions, Tigers"}
+    %{ conv | resp_body: "Bears, Lions, Tigers"}
   end
 
   @doc"""
