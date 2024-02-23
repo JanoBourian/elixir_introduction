@@ -762,6 +762,43 @@ IO.puts Factorial.fun(%{ method: "POST"})
 ```elixir
 ```
 
+## 17.- A peek At Phoenix
+```elixir
+```
+
+## 18.- Test Automation
+```elixir
+```
+
+## 19.- Rendering JSON
+```elixir
+```
+
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
 ```
 ```
 
