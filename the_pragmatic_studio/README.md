@@ -965,7 +965,47 @@ Version with the anonymous function shortcut version two
 ```
 
 ## 16.- Comprehensions
+
+Generate dynamic content. *.eex* is for embedded content.
 ```elixir
+h EEx.eval_file/1
+```
+
+First template using Enum:
+```elixir
+<h1> All the Bears! </h1>
+
+<ul>
+    <%= Enum.map(bears, fn(bear) -> %>
+        <li> <%= bear.name %> - <%= bear.type %> </li>
+    <%= end) %>
+</ul>
+```
+
+Example of comprehension
+```elixir
+for x <- [1, 2, 3], do: x*3
+for size <- ["S", "M", "L"], color <- [:red, :blue], do: {size, color}
+```
+
+Using comprehension
+```elixir
+<h1> All the Bears! </h1>
+
+<ul>
+    <%= for bear <- bears do %>
+        <li> <%= bear.name %> - <%= bear.type %> </li> 
+    <% end %>
+</ul>
+```
+
+A single integration
+```elixir
+<h1>Show <%= bear.name %></h1>
+
+<p>
+    Is Name hibernating? <strong><%= bear.hibernating %></strong>
+</p>
 ```
 
 ## 17.- A peek At Phoenix
