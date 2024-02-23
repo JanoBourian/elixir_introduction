@@ -43,7 +43,7 @@ defmodule Janobourian.Handler do
     BearController.index(conv)
   end
 
-  def route(%Conv{ method: "GET", path: "/bears" <> id} = conv) do
+  def route(%Conv{ method: "GET", path: "/bears/" <> id} = conv) do
     params = Map.put(conv.params, "id", id)
     BearController.show(conv, params)
   end
@@ -128,7 +128,7 @@ Accept: */*
 IO.puts Janobourian.Handler.handle(request)
 
 request = """
-GET /bears/1/long/path HTTP/1.1
+GET /bears/1 HTTP/1.1
 Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
@@ -183,5 +183,23 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 21
 
 name=Baloo&type=Brown
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request = """
+GET /bears HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request = """
+GET /bears/1 HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
 """
 IO.puts Janobourian.Handler.handle(request)

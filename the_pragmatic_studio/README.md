@@ -924,7 +924,31 @@ Most popular Enum operations:
 * reduce
 
 ## 15.- Slicing and dicing with Enum - Part 2
+
+Version with anonymous functions
 ```elixir
+  def index(%Conv{} = conv) do
+    items =
+      Wildthings.list_bears()
+      |> Enum.filter(fn(b) -> Bear.is_grizzly(b) end)
+      |> Enum.sort(fn(b1, b2) -> Bear.order_asc_by_name(b1, b2) end)
+      |> Enum.map(fn(b) -> bear_item(b) end)
+      |> Enum.join()
+    %{ conv | status: 200, resp_body: "<ul>#{items}</ul>"}
+  end
+```
+
+Version with the anonymous function shortcut
+```elixir
+  def index(%Conv{} = conv) do
+    items =
+      Wildthings.list_bears()
+      |> Enum.filter(&Bear.is_grizzly(&1))
+      |> Enum.sort(&Bear.order_asc_by_name(&1, &2))
+      |> Enum.map(&bear_item(&1))
+      |> Enum.join()
+    %{ conv | status: 200, resp_body: "<ul>#{items}</ul>"}
+  end
 ```
 
 ## 16.- Comprehensions
