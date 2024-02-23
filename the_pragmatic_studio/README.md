@@ -132,6 +132,22 @@ parts = String.split(first_line, " ")
 Enum.at(parts, 0)
 ```
 
+New function using pattern matching
+```elixir
+  @doc"""
+  Documentation for parse
+  """
+  def parse(request) do
+    # TODO: Parse the request string into a map
+    [method, path, _] =
+      request
+      |> String.split("\n")
+      |> List.first()
+      |> String.split(" ")
+
+    %{method: method, path: path, resp_body: ""}
+  end
+```
 
 ## 5.- Immutable data
 
