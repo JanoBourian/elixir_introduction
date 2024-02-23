@@ -835,8 +835,93 @@ end
 ```
 
 ## 15.- Slicing and dicing with Enum - Part 1
+
+Create new module for /bears operations
 ```elixir
+  def route(%Conv{ method: "POST", path: "/bears"} = conv) do
+    BearController.create(conv, conv.params)
+  end
+
+  def route(%Conv{ method: "GET", path: "/bears"} = conv) do
+    BearController.index(conv)
+  end
+
+  def route(%Conv{ method: "GET", path: "/bears" <> id} = conv) do
+    params = Map.put(conv.params, "id", id)
+    BearController.show(conv, params)
+  end
 ```
+
+```elixir
+defmodule Janobourian.BearController do
+
+  alias Janobourian.Conv
+
+  def index(%Conv{} = conv) do
+    %{ conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+  end
+
+  def show(%Conv{} = conv, %{"id" => id} = params) do
+    %{ conv | status: 200, resp_body: "Bear #{id}"}
+  end
+
+  def create(%Conv{} = conv, %{ "type" => type, "name" => name} = params) do
+    %{ conv | status: 200, resp_body: "Created a #{type} bear named #{name}"}
+  end
+end
+
+```
+
+We will create a bear struct and a list of wildthings
+```elixir
+defmodule Janobourian.Bear do
+  defstruct [
+    id: nil,
+    name: "",
+    type: "",
+    hibernating: false
+  ]
+end
+
+```
+
+```elixir
+defmodule Janobourian.Wildthings do
+  alias Janobourian.Bear
+
+  def list_bears do
+    [
+      %Bear{id: 1, name: "Teddy", type: "Brown", hibernating: true },
+      %Bear{id: 2, name: "Smokey", type: "Black" },
+      %Bear{id: 3, name: "Paddington", type: "Brown" },
+      %Bear{id: 4, name: "Scarface", type: "Grizzly", hibernating: true },
+      %Bear{id: 5, name: "Snow", type: "Polar" },
+      %Bear{id: 6, name: "Brutus", type: "Grizzly", hibernating: true },
+      %Bear{id: 7, name: "Rosie", type: "Brown", hibernating: true },
+      %Bear{id: 8, name: "Roscoe", type: "Panda" },
+      %Bear{id: 9, name: "Iceman", type: "Polar", hibernating: true },
+      %Bear{id: 10, name: "Kenai", type: "Grizzly" },
+    ]
+  end
+end
+
+```
+
+And we use anonymous functions and Enum module
+```elixir
+triple = fn(x) -> x*3 end
+triple.(3)
+result = Enum.map([1, 2, 3], triple)
+```
+
+Most popular Enum operations:
+* concat
+* count
+* each
+* filter
+* find
+* map
+* reduce
 
 ## 15.- Slicing and dicing with Enum - Part 2
 ```elixir

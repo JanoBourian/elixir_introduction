@@ -8,6 +8,7 @@ defmodule Janobourian.Handler do
   import Janobourian.Plugins, only: [rewrite_path: 1, log: 1, track: 1]
   import Janobourian.Parser, only: [parse: 1]
 
+  alias Janobourian.BearController
   alias Janobourian.Conv
 
   @doc"""
@@ -35,15 +36,16 @@ defmodule Janobourian.Handler do
   end
 
   def route(%Conv{ method: "POST", path: "/bears"} = conv) do
-    %{ conv | status: 200, resp_body: "Created a #{conv.params["type"]} bear named #{conv.params["name"]}"}
+    BearController.create(conv, conv.params)
   end
 
   def route(%Conv{ method: "GET", path: "/bears"} = conv) do
-    %{ conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+    BearController.index(conv)
   end
 
   def route(%Conv{ method: "GET", path: "/bears" <> id} = conv) do
-    %{ conv | status: 200, resp_body: "Bear #{id}"}
+    params = Map.put(conv.params, "id", id)
+    BearController.show(conv, params)
   end
 
   def route(%Conv{ path: path} = conv) do
