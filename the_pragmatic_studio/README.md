@@ -1,4 +1,4 @@
-# 1.- Previous
+## 1.- Previous
 
 ```bash
 docker run -it -v /home/ec2-user/environment/elixir_introduction:/app/data --rm elixir bash
@@ -20,7 +20,7 @@ defmodule Servy do
 end
 ```
 
-# 2.- Create Mix Project
+## 2.- Create Mix Project
 
 Basic steps to create, edit and run an elixir project.
 
@@ -55,7 +55,7 @@ r Servy
 h String.split/1
 ```
 
-3.- High Level Transformation
+## 3.- High Level Transformation
 
 The convention is to create a new modules inside of _/lib_ with the name of the
 project (in this case _/servy_)
