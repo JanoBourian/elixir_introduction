@@ -2,9 +2,11 @@ defmodule Janobourian.Handler do
   @moduledoc """
   Documentation for Janobourian.Handler
   """
-
   @pages_path Path.expand("../../pages", __DIR__)
   @about_html "about.html"
+
+  import Janobourian.Plugins, only: [rewrite_path: 1, log: 1, track: 1]
+  import Janobourian.Parse, only: [parse: 1]
 
   @doc"""
   Documentation for handler function
@@ -18,33 +20,6 @@ defmodule Janobourian.Handler do
     |> track()
     |> format()
   end
-
-  @doc"""
-  Documentation for parse
-  """
-  def parse(request) do
-    # TODO: Parse the request string into a map
-    [method, path, _] =
-      request
-      |> String.split("\n")
-      |> List.first()
-      |> String.split(" ")
-
-    %{
-      method: method,
-      path: path,
-      resp_body: "",
-      status: nil
-    }
-  end
-
-  def rewrite_path(%{ path: "/wildlife"} = conv) do
-    %{ conv | path: "/wildthings"}
-  end
-
-  def rewrite_path(conv), do: conv
-
-  def log(conv), do: IO.inspect conv
 
   def route(%{ method: "GET", path: "/about"} = conv) do
     @pages_path
@@ -69,13 +44,6 @@ defmodule Janobourian.Handler do
     %{ conv | status: 404, resp_body: "No #{path} here!"}
   end
 
-  def track( %{ status: 404, path: path} = conv) do
-    IO.puts "Warning: #{path} is on the loose!"
-    conv
-  end
-
-  def track(conv), do: conv
-
   @doc"""
   Documentaion for format
   """
@@ -90,9 +58,6 @@ defmodule Janobourian.Handler do
     """
   end
 
-  @doc"""
-  Return a status code description based on status code
-  """
   defp status_reason(code) do
     %{
         200 => "OK",
@@ -102,19 +67,19 @@ defmodule Janobourian.Handler do
         404 => "Not Found",
         500 => "Internal Server Error"
     }[code]
-end
+  end
 
-defp handle_file({ :ok, content}, conv) do
-  %{ conv | status: 200, resp_body: content}
-end
+  defp handle_file({ :ok, content}, conv) do
+    %{ conv | status: 200, resp_body: content}
+  end
 
-defp handle_file({ :error, :enoent}, conv) do
-  %{ conv | status: 404, resp_body: "File not found"}
-end
+  defp handle_file({ :error, :enoent}, conv) do
+    %{ conv | status: 404, resp_body: "File not found"}
+  end
 
-defp handle_file({ :error, reason}, conv) do
-  %{ conv | status: 500, resp_body: "File error: #{reason}"}
-end
+  defp handle_file({ :error, reason}, conv) do
+    %{ conv | status: 500, resp_body: "File error: #{reason}"}
+  end
 
 end
 
