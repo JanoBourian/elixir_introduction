@@ -44,11 +44,19 @@ defmodule Janobourian.Handler do
   end
 
   def route(conv, "GET", "/wildthings") do
-    %{ conv | resp_body: "Bears, Lions, Tigers"}
+    %{ conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
 
   def route(conv, "GET", "/bears") do
-    %{ conv | resp_body: "Teddy, Smokey, Paddington"}
+    %{ conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
+  end
+
+  def route(conv, "GET", "/bears" <> id) do
+    %{ conv | status: 200, resp_body: "Bear #{id}"}
+  end
+
+  def route(conv, _ , path) do
+    %{ conv | status: 404, resp_body: "No #{path} here!"}
   end
 
 
@@ -58,13 +66,27 @@ defmodule Janobourian.Handler do
   def format(conv) do
     # TODO: Use values in the map to create an HTTP response string
     """
-    HTTP/1.1 200 OK
+    HTTP/1.1 #{conv.status} #{status_reason(conv.status)}
     Content-Type: text/html
-    Content-Length: 20
+    Content-Length: #{String.length(conv.resp_body)}
 
-    Bears, Lions, Tigers
+    #{conv.resp_body}
     """
   end
+
+  @doc"""
+  Return a status code description based on status code
+  """
+  defp status_reason(code) do
+    %{
+        200 => "OK",
+        201 => "Created",
+        401 => "Unauthorized",
+        403 => "Forbidden",
+        404 => "Not Found",
+        500 => "Internal Server Error"
+    }[code]
+end
 
 end
 
@@ -87,7 +109,25 @@ Accept: */*
 IO.puts Janobourian.Handler.handle(request)
 
 request = """
-GET /bears HTTP/1.1
+GET /bears/1 HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request = """
+GET /bigfoot HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+IO.puts Janobourian.Handler.handle(request)
+
+request = """
+GET /bears/1/long/path HTTP/1.1
 Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
