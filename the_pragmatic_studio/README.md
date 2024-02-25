@@ -1030,7 +1030,61 @@ mix ecto.migrate
 ```
 
 ## 18.- Test Automation
+
+Test example using macro
 ```elixir
+defmodule JanobourianTest do
+  use ExUnit.Case
+  doctest Janobourian
+
+  test "greets the world" do
+    assert Janobourian.hello() == :world
+    refute Janobourian.hello() == :match
+  end
+end
+```
+
+Unittes
+```elixir
+defmodule ParserTest do
+  use ExUnit.Case
+  doctest Janobourian.Parser
+
+  alias Janobourian.Parser
+
+  test "parses a list of headers fields into a map" do
+    header_lines = ["A: 1", "B: 2"]
+    headers = Parser.parse_headers(header_lines, %{})
+
+    assert headers == %{ "A" => "1", "B" => "2"}
+  end
+end
+
+```
+
+Doctest
+```elixir
+  @doc """
+  Parses the given param string of the form `key1=value1&key2=value2`
+  into a map with corresponding keys and values
+
+  ## Examples
+      iex> Janobourian.Parser.parse_params("application/x-www-form-urlencoded", "key1=value1&key2=value2")
+      %{"key1" => "value1", "key2" => "value2"}
+
+      iex> Janobourian.Parser.parse_params("application/x-www-form-urlencoded", "")
+      %{}
+
+      iex> Janobourian.Parser.parse_params("", "key1=value1&key2=value2")
+      %{}
+  """
+  def parse_params("application/x-www-form-urlencoded", params_string) do
+    params_string
+    |> String.trim
+    |> URI.decode_query()
+  end
+
+  def parse_params(_, _), do: %{}
 ```
 
 ## 19.- Rendering JSON

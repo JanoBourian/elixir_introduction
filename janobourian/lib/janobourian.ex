@@ -11,7 +11,7 @@ defmodule Janobourian do
   ## Examples
 
       iex> Janobourian.hello()
-      :world
+      "Hello " <> "janobourian"
 
   """
   def hello do

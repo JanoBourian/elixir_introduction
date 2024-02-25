@@ -34,7 +34,7 @@ defmodule Janobourian.Parser do
     }
   end
 
-  defp parse_headers([head | tail], headers) do
+  def parse_headers([head | tail], headers) do
     [key, value] =
       head
       |> String.split(": ")
@@ -42,14 +42,27 @@ defmodule Janobourian.Parser do
     parse_headers(tail, headers)
   end
 
-  defp parse_headers([], headers), do: headers
+  def parse_headers([], headers), do: headers
 
-  defp parse_params("application/x-www-form-urlencoded", params_string) do
+  @doc """
+  Parses the given param string of the form `key1=value1&key2=value2`
+  into a map with corresponding keys and values
+
+  ## Examples
+      iex> params_strings = "key1=value1&key2=value2"
+      iex> Janobourian.Parser.parse_params("application/x-www-form-urlencoded", params_strings)
+      %{"key1" => "value1", "key2" => "value2"}
+      iex> Janobourian.Parser.parse_params("application/x-www-form-urlencoded", "")
+      %{}
+      iex> Janobourian.Parser.parse_params("", params_strings)
+      %{}
+  """
+  def parse_params("application/x-www-form-urlencoded", params_string) do
     params_string
     |> String.trim
     |> URI.decode_query()
   end
 
-  defp parse_params(_, _), do: %{}
+  def parse_params(_, _), do: %{}
 
 end

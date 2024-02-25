@@ -14,7 +14,7 @@ defmodule Janobourian.BearController do
       # |> Enum.map(&bear_item/1)
       # |> Enum.join()
 
-      render(conv, "show.eex", [bears: bears])
+      render(conv, "index.eex", [bears: bears])
   end
 
   def show(%Conv{} = conv, %{"id" => id} = _params) do
