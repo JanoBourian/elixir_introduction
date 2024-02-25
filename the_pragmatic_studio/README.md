@@ -1091,6 +1091,59 @@ Doctest
 ```elixir
 ```
 
+## 20.- Web Server Sockets
+```elixir
+```
+
+## 21.- Concurrent, Isolated Processes Part 1
+```elixir
+```
+
+## 21.- Concurrent, Isolated Processes Part 2
+```elixir
+```
+
+## 22.- Sending and receiving Messages
+```elixir
+```
+
+## 23.- Asynchronous Tasks
+```elixir
+```
+
+## 24.- Stateful Server Processes parte 1
+```elixir
+```
+
+## 24.- Stateful Server Processes parte 2
+```elixir
+```
+
+## 24.- Stateful Server Processes parte 3
+```elixir
+```
+
+## 24.- Stateful Server Processes parte 4
+```elixir
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
 
 ```
 ```
