@@ -1009,7 +1009,24 @@ A single integration
 ```
 
 ## 17.- A peek At Phoenix
-```elixir
+
+Create new phoenix project
+```bash
+mix phx.new refuge
+cd refuge
+# Then configure your database in config/dev.exs and run:
+mix ecto.create
+# Start your Phoenix app with:
+mix phx.server
+# You can also run your app inside IEx as:
+iex -S mix phx.server
+```
+
+Add the resource to your browser scope in lib/refuge_web/router.ex
+```bash
+mix phx.gen.html Wildthings Bear bears name:string type:string hibernating:boolean 
+# To run migrations
+mix ecto.migrate
 ```
 
 ## 18.- Test Automation
