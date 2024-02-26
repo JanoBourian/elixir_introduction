@@ -1253,7 +1253,6 @@ Process.list |> Enum.count
 :observer.start
 ```
 
-## 22.- Sending and receiving Messages
 Change the mix.exs to get access *:observer.start*
 ```elixir
   def application do
@@ -1269,7 +1268,11 @@ pid = spawn(fn -> Janobourian.HttpServer.start(5678) end)
 ```
 
 ```elixir
-pid = spawn(Janobourian.HttpServer, :start, [400])
+pid = spawn(Janobourian.HttpServer, :start, [5678])
+```
+
+## 22.- Sending and receiving Messages
+```elixir
 ```
 
 ## 23.- Asynchronous Tasks
