@@ -1241,14 +1241,35 @@ end
 
 ## 21.- Concurrent, Isolated Processes Part 1
 ```elixir
+pid = spawn(fn -> IO.puts "Howdy!" end
+pid = spawn(fn -> :timer.sleep(10000); IO.puts "Howdy!" end)
+Process.alive?(pid)
 ```
 
 ## 21.- Concurrent, Isolated Processes Part 2
 ```elixir
+Process.list
+Process.list |> Enum.count
+:observer.start
 ```
 
 ## 22.- Sending and receiving Messages
+Change the mix.exs to get access *:observer.start*
 ```elixir
+  def application do
+    [
+      extra_applications: [:logger, :eex, :observer, :wx, :runtime_tools]
+    ]
+  end
+```
+
+Anonymous functions vs named functions
+```elixir
+pid = spawn(fn -> Janobourian.HttpServer.start(5678) end)
+```
+
+```elixir
+pid = spawn(Janobourian.HttpServer, :start, [400])
 ```
 
 ## 23.- Asynchronous Tasks
