@@ -39,7 +39,12 @@ defmodule Janobourian.Handler do
     BearController.create(conv, conv.params)
   end
 
+  def route(%Conv{ method: "GET", path: "/api/bears"} = conv) do
+    Janobourian.Api.BearController.index(conv)
+  end
+
   def route(%Conv{ method: "GET", path: "/bears"} = conv) do
+    IO.inspect conv
     BearController.index(conv)
   end
 
@@ -59,7 +64,7 @@ defmodule Janobourian.Handler do
     # TODO: Use values in the map to create an HTTP response string
     """
     HTTP/1.1 #{conv.status} #{status_reason(conv.status)}
-    Content-Type: text/html
+    Content-Type: #{conv.response_content_type}
     Content-Length: #{String.length(conv.resp_body)}
 
     #{conv.resp_body}

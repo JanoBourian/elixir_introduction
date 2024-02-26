@@ -22,9 +22,9 @@ defmodule HandlerTest do
     """
   end
 
-  test "GET /wildthings" do
+  test "GET /api/bears" do
     request = """
-    GET /bears HTTP/1.1
+    GET /api/bears HTTP/1.1
     Host: example.com
     User-Agent: ExampleBrowser/1.0
     Accept: */*
@@ -35,10 +35,11 @@ defmodule HandlerTest do
 
     assert response == """
     HTTP/1.1 200 OK
-    Content-Type: text/html
-    Content-Length: 20
+    Content-Type: application/json
+    Content-Length: 183
 
-    Bears, Lions, Tigers
+    [{"hibernating":true,"type":"Brown","name":"Teddy","id":1},{"hibernating":false,"type":"Black","name":"Smokey","id":2},{"hibernating":false,"type":"Brown","name":"Paddington","id":3}]
     """
   end
+
 end

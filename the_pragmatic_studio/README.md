@@ -1088,7 +1088,16 @@ Doctest
 ```
 
 ## 19.- Rendering JSON
+
+You can put the dependencie inside *mix.exs* and run:
+```bash
+mix deps.get
+```
+
+In iex console
 ```elixir
+bears = Janobourian.Wildthins.list_bears()
+Poison.encode!(bears)
 ```
 
 ## 20.- Web Server Sockets
