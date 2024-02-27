@@ -964,6 +964,16 @@ Version with the anonymous function shortcut version two
   end
 ```
 
+Enum and anonymous functions
+```elixir
+output = fn(x) -> IO.pust x end
+lista = ["cam-1", "cam-2", "cam-3"]
+lista |> Enum.map(&output.(&1))
+# cam-1
+# cam-2
+# cam-3
+```
+
 ## 16.- Comprehensions
 
 Generate dynamic content. *.eex* is for embedded content.
@@ -1296,7 +1306,76 @@ receive do {:result, filename} -> filename end
 
 
 ## 23.- Asynchronous Tasks
+To run inside iex console
 ```elixir
+Janobourian.HttpServer.start(5678)
+```
+
+To test connections using console
+```bash
+curl http://localhost:5678/snapshot
+```
+
+Create a Fetcher 
+```elixir
+defmodule Janobourian.Fetcher do
+  def async(camera_name) do
+    parent = self()
+    spawn(fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot(camera_name)}) end)
+  end
+
+  def get_result do
+    receive do {:result, filename} -> filename end
+  end
+end
+
+```
+
+Fetcher with functions
+```elixir
+defmodule Janobourian.Fetcher do
+  def async(func) do
+    parent = self()
+    spawn(fn -> send(parent, {self(), :result, func.()}) end)
+  end
+
+  def get_result(pid) do
+    receive do {^pid, :result, value} -> value end
+  end
+end
+
+```
+
+Without Task module
+```elixir
+  def route(%Conv{ method: "GET", path: "/sensors" <> camera_name} = conv) do
+    pid4 = Fetcher.async(fn -> Janobourian.Tracker.get_location("bigfoot") end)
+
+    snapshots =
+      ["cam-1", "cam-2", "cam-3"]
+      |> Enum.map(&Fetcher.async(fn -> Janobourian.VideoCam.get_snapshot(&1) end))
+      |> Enum.map(&Fetcher.get_result/1)
+
+    where_is_bigfoot = Fetcher.get_result(pid4)
+
+    %{ conv | status: 200, resp_body: inspect({snapshots, where_is_bigfoot})}
+  end
+```
+
+With Task module
+```elixir
+  def route(%Conv{ method: "GET", path: "/sensors" <> camera_name} = conv) do
+    task = Task.async(fn -> Janobourian.Tracker.get_location("bigfoot") end)
+
+    snapshots =
+      ["cam-1", "cam-2", "cam-3"]
+      |> Enum.map(&Task.async(fn -> Janobourian.VideoCam.get_snapshot(&1) end))
+      |> Enum.map(&Task.await/1)
+
+    where_is_bigfoot = Task.await(task)
+
+    %{ conv | status: 200, resp_body: inspect({snapshots, where_is_bigfoot})}
+  end
 ```
 
 ## 24.- Stateful Server Processes parte 1

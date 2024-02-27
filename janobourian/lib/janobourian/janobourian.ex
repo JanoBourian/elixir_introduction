@@ -11,6 +11,7 @@ defmodule Janobourian.Handler do
   alias Janobourian.BearController
   alias Janobourian.Conv
   alias Janobourian.VideoCam
+  alias Janobourian.Fetcher
 
   @doc"""
   Documentation for handler function
@@ -25,20 +26,17 @@ defmodule Janobourian.Handler do
     |> format()
   end
 
-  def route(%Conv{ method: "GET", path: "/snapshot" <> camera_name} = conv) do
-    parent = self() # the request-handling process
+  def route(%Conv{ method: "GET", path: "/sensors" <> camera_name} = conv) do
+    pid4 = Fetcher.async(fn -> Janobourian.Tracker.get_location("bigfoot") end)
 
-    spawn( fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot("cam-1")}) end)
-    spawn( fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot("cam-2")}) end)
-    spawn( fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot("cam-3")}) end)
+    snapshots =
+      ["cam-1", "cam-2", "cam-3"]
+      |> Enum.map(&Fetcher.async(fn -> Janobourian.VideoCam.get_snapshot(&1) end))
+      |> Enum.map(&Fetcher.get_result/1)
 
-    snapshot1 = receive do {:result, filename} -> filename end
-    snapshot2 = receive do {:result, filename} -> filename end
-    snapshot3 = receive do {:result, filename} -> filename end
+    where_is_bigfoot = Fetcher.get_result(pid4)
 
-    snapshots = [snapshot1, snapshot2, snapshot3]
-
-    %{ conv | status: 200, resp_body: inspect(snapshots)}
+    %{ conv | status: 200, resp_body: inspect({snapshots, where_is_bigfoot})}
   end
 
   def route(%Conv{ method: "GET", path: "/kaboom" } = conv) do
