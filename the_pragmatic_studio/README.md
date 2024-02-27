@@ -1272,8 +1272,28 @@ pid = spawn(Janobourian.HttpServer, :start, [5678])
 ```
 
 ## 22.- Sending and receiving Messages
+
+Information:
 ```elixir
+send(parent_pid, {:result, "cam-1-snapshot.jpg"})
+snapshot =
+    receive do
+        {:result, filename} -> filename
+    end
 ```
+
+Process as a FIFO
+```elixir
+snapshot1 = spawn( fn -> Janobourian.VideoCam.get_snapshot("cam-1") end)
+parent = self()
+snapshot1 = spawn(fn -> send(parent, {:result, "cam-1-snapshot.jpg"}) end)
+Process.info(parent, :messages)
+receive do {:result, filename} -> filename end
+spawn(fn -> :timer.sleep(15000); send(parent, {:result, "cam-3-snapshot.jpg"}) end)
+Process.info(parent, :messages)
+receive do {:result, filename} -> filename end
+```
+
 
 ## 23.- Asynchronous Tasks
 ```elixir

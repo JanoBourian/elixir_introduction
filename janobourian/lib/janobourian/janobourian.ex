@@ -10,6 +10,7 @@ defmodule Janobourian.Handler do
 
   alias Janobourian.BearController
   alias Janobourian.Conv
+  alias Janobourian.VideoCam
 
   @doc"""
   Documentation for handler function
@@ -22,6 +23,22 @@ defmodule Janobourian.Handler do
     |> route()
     |> track()
     |> format()
+  end
+
+  def route(%Conv{ method: "GET", path: "/snapshot" <> camera_name} = conv) do
+    parent = self() # the request-handling process
+
+    spawn( fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot("cam-1")}) end)
+    spawn( fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot("cam-2")}) end)
+    spawn( fn -> send(parent, {:result, Janobourian.VideoCam.get_snapshot("cam-3")}) end)
+
+    snapshot1 = receive do {:result, filename} -> filename end
+    snapshot2 = receive do {:result, filename} -> filename end
+    snapshot3 = receive do {:result, filename} -> filename end
+
+    snapshots = [snapshot1, snapshot2, snapshot3]
+
+    %{ conv | status: 200, resp_body: inspect(snapshots)}
   end
 
   def route(%Conv{ method: "GET", path: "/kaboom" } = conv) do
