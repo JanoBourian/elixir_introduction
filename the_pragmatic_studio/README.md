@@ -1389,6 +1389,13 @@ With Task module
 
 ## 24.- Stateful Server Processes parte 2
 ```elixir
+pid = spawn(Janobourian.PledgeServer, :listen_loop, [[]])
+send(pid, {:create_pledge, "larry", 10})
+send(pid, {:create_pledge, "moe", 20})
+send(pid, {:create_pledge, "bae", 75})
+send(pid, {self(), :recent_pledges})
+Process.info(self(), :messages)
+receive do {:response, pledges} -> pledges end
 ```
 
 ## 24.- Stateful Server Processes parte 3

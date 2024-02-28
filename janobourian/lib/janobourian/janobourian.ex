@@ -31,7 +31,7 @@ defmodule Janobourian.Handler do
   end
 
   def route(%Conv{ method: "GET", path: "/pledges"} = conv) do
-    Janobourian.PledgeController.create(conv)
+    Janobourian.PledgeController.index(conv)
   end
 
   def route(%Conv{ method: "GET", path: "/sensors" <> camera_name} = conv) do

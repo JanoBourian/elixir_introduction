@@ -6,7 +6,7 @@ defmodule Janobourian.PledgeController do
     %{conv | status: 201, resp_body: "#{name} pledged #{amount}!"}
   end
 
-  def index() do
+  def index(conv) do
     # Gets the recent pledges from the cache
     pledges = Janobourian.PledgeServer.recent_pledges()
 
