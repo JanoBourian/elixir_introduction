@@ -1379,8 +1379,13 @@ With Task module
 ```
 
 ## 24.- Stateful Server Processes parte 1
-```elixir
-```
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
 
 ## 24.- Stateful Server Processes parte 2
 ```elixir

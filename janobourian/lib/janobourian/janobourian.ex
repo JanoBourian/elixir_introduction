@@ -26,6 +26,14 @@ defmodule Janobourian.Handler do
     |> format()
   end
 
+  def route(%Conv{ method: "POST", path: "/pledges"} = conv) do
+    Janobourian.PledgeController.create(conv, conv.params)
+  end
+
+  def route(%Conv{ method: "GET", path: "/pledges"} = conv) do
+    Janobourian.PledgeController.create(conv)
+  end
+
   def route(%Conv{ method: "GET", path: "/sensors" <> camera_name} = conv) do
     pid4 = Fetcher.async(fn -> Janobourian.Tracker.get_location("bigfoot") end)
 
