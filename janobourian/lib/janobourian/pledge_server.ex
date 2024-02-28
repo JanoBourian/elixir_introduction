@@ -1,14 +1,26 @@
 defmodule Janobourian.PledgeServer do
 
+  @name :pledge_server
+
+  def start do
+    IO.puts "Starting the pledge server..."
+
+    pid = spawn(__MODULE__, :listen_loop, [[]])
+    Process.register(pid, @name)
+    pid
+  end
+
   def listen_loop(state) do
     IO.puts "\nWaiting for a message..."
 
     receive do
-      {:create_pledge, name, amount} ->
+      {sender, :create_pledge, name, amount} ->
         {:ok, id} = send_pledge_to_service(name, amount)
-        new_state = [{name, amount} | state]
+        most_recent_pledges = Enum.take(state, 2)
+        new_state = [{name, amount} | most_recent_pledges]
         IO.puts "#{name} pledged #{amount}"
         IO.puts "New state is #{inspect new_state}"
+        send(sender, {:response, id})
         listen_loop(new_state)
       {sender, :recent_pledges} ->
         send(sender, {:response, state})
@@ -17,24 +29,32 @@ defmodule Janobourian.PledgeServer do
     end
   end
 
-  # def create_pledge(name, amount) do
-  #   {:ok, id} = send_pledge_to_service(name, amount)
+  def create_pledge( name, amount) do
+    send(@name, {self(), :create_pledge, name, amount})
 
-  #   # Cache the pledge:
-  #   [
-  #     {"larry", 10}
-  #   ]
-  # end
+    receive do {:response, status} -> status end
+  end
 
-  # def recent_pledges() do
-  #   # Returns the most recent pledges (cache):
-  #   [
-  #     {"larry", 10}
-  #   ]
-  # end
+  def recent_pledges() do
+    send(@name, {self(), :recent_pledges})
+
+    receive do {:response, pledges} -> pledges end
+  end
 
   defp send_pledge_to_service(_name, _amount) do
     # CODE GOES HERE TO SEND PLEDGE TO EXTERNAL SERVICE
     {:ok, "pledge-#{:rand.uniform(1000)}"}
   end
 end
+
+# alias Janobourian.PledgeServer
+
+# pid = PledgeServer.start()
+
+# PledgeServer.create_pledge("larry", 10)
+# PledgeServer.create_pledge("moe", 20)
+# PledgeServer.create_pledge("bae", 30)
+# PledgeServer.create_pledge("curly", 40)
+# PledgeServer.create_pledge("grace", 50)
+
+# IO.inspect PledgeServer.recent_pledges()
