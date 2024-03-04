@@ -25,6 +25,18 @@ Running a script:
 elixir simple.exs
 ```
 
+## Basic types
+
+```elixir
+:atom # atom / symbol
+[1, 2, 3] # list
+{1, 2, 3} # tuple
+0b1010 # binary
+0o777 # octal
+0x1F # hexadecimal
+1.0e-10 # scientific notation
+```
+
 ```elixir
 IO.puts("With a bunch of flow")
 
@@ -49,4 +61,177 @@ the number of arguments that the function recieves.
 ```elixir
 h trunc/1
 h Kernel.trunc/1
+```
+
+Booleans
+```elixir
+true
+true == false
+# and/2
+true and true
+# or/2
+false or is_boolean(true)
+# not/1
+not false
+# The first argument should be evaluated as boolean
+1 and true # error
+
+# to evaluate nil we have ||/2, &&/2 and !/1
+1 || true
+nil && 13
+!true
+```
+
+Atoms
+
+An atom is a constante whose value is its own name. 
+```elixir
+:apple
+:orange
+:apple == :apple
+:apple == :orange
+# true and false are atoms
+true == :true
+is_atom(false)
+is_boolean(:true)
+```
+
+Strings
+```elixir
+string = "world!"
+"Hello " <> string
+"Hello #{string}"
+long_message = "hello\nworld"
+IO.puts long_message
+byte_size(long_message)
+String.length(long_message)
+String.upcase(long_message)
+```
+
+Structural comparison
+```elixir
+1 == 1
+1 != 2
+1 < 2
+"foo" == "foo"
+"foo" == "bar"
+"foo" != "bar"
+1 == 1.0
+2 == 2.0
+1 === 1.0 # strict comparison operator
+2 !== 2.0
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
 ```
