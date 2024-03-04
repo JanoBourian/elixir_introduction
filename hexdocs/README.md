@@ -3,6 +3,31 @@
 This is going to be a file to create documentation based on the Elixir official 
 documentation. https://hexdocs.pm/elixir/1.16/introduction.html
 
+## Index
+- [Introduction](#section1)
+- [Basic Types](#section2)
+- [Lists and tuples](#section3)
+- [Pattern matching](#section4)
+- [case, cond, and if](#section5)
+- [Anonymous functions](#section6)
+- [Binaries, strings, and charlists](#section7)
+- [Modules and functions](#section8)
+- [Recursion](#section9)
+- [Enumerables and Streams](#section10)
+- [Processes](#section11)
+- [IO and the file system](#section12)
+- [alias, require, and import](#section13)
+- [Modules attributes](#section14)
+- [Structs](#section15)
+- [Protocols](#section16)
+- [Comprehensions](#section17)
+- [Sigils](#section18)
+- [try, catch, and rescue](#section19)
+- [Writing documentation](#section20)
+- [Optional syntax sheet](#section21)
+- [Erlang libraries](#section22)
+- [Debugging](#section23)
+
 ## API References
 
 Modules https://hexdocs.pm/elixir/1.16.1/api-reference.html#modules
@@ -12,6 +37,7 @@ Modules https://hexdocs.pm/elixir/1.16.1/api-reference.html#modules
 ```bash
 docker run -it -v /home/ec2-user/environment/elixir_introduction/hexdocs:/app/data --rm elixir bash
 ```
+<div id="section1"></div>
 
 ## Introduction
 
@@ -24,6 +50,8 @@ Running a script:
 ```bash
 elixir simple.exs
 ```
+
+<div id="section2"></div>
 
 ## Basic types
 
@@ -122,6 +150,8 @@ Structural comparison
 2 !== 2.0
 ```
 
+<div id="section3"></div>
+
 ## List and tuples
 
 ### List
@@ -168,17 +198,106 @@ Path.expand("", __DIR__)
 |> File.read()
 ```
 
-```
-```
+<div id="section4"></div>
 
 ```
 ```
 
-```
-```
+<div id="section5"></div>
 
 ```
 ```
+
+<div id="section6"></div>
+
+```
+```
+
+<div id="section7"></div>
+
+```
+```
+
+<div id="section8"></div>
+
+```
+```
+
+<div id="section9"></div>
+
+```
+```
+
+<div id="section10"></div>
+
+```
+```
+
+<div id="section11"></div>
+
+```
+```
+
+<div id="section12"></div>
+
+```
+```
+
+<div id="section13"></div>
+
+```
+```
+
+<div id="section14"></div>
+
+```
+```
+
+<div id="section15"></div>
+
+```
+```
+
+<div id="section16"></div>
+
+```
+```
+
+<div id="section17"></div>
+
+```
+```
+
+<div id="section18"></div>
+
+```
+```
+
+<div id="section19"></div>
+
+```
+```
+
+<div id="section20"></div>
+
+```
+```
+
+<div id="section21"></div>
+
+```
+```
+
+<div id="section22"></div>
+
+```
+```
+
+<div id="section23"></div>
+
+```
+```
+
 
 ```
 ```
