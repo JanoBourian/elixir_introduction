@@ -3,6 +3,10 @@
 This is going to be a file to create documentation based on the Elixir official 
 documentation. https://hexdocs.pm/elixir/1.16/introduction.html
 
+## API References
+
+Modules https://hexdocs.pm/elixir/1.16.1/api-reference.html#modules
+
 ## Installation
 
 ```bash
@@ -14,6 +18,11 @@ docker run -it -v /home/ec2-user/environment/elixir_introduction/hexdocs:/app/da
 ```elixir
 "Hello " <> "world!"
 IO.puts("Hello world!")
+```
+
+Running a script:
+```bash
+elixir simple.exs
 ```
 
 ```elixir
