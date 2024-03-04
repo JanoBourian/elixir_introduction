@@ -122,16 +122,50 @@ Structural comparison
 2 !== 2.0
 ```
 
-```
+## List and tuples
+
+### List
+```elixir
+[1, 2, 3, 4, true]
+length([1, 2, 3, 4, true])
+# add and subtract
+[1, 2, 3] ++ [4, 5, 6]
+[1, 2, 3, true, 5, true, 7, false] -- [true, false]
+list = [1, 2, 3, 4]
+hd(list)
+tl(list)
+[head | tail] = list
+[11, 12, 13]
+# ~c"\v\f\r"
+[104, 101, 108, 108, 111]
+# ~c"hello"
+i ~c"hello"
 ```
 
-```
+### Tuples
+```elixir
+{:ok, "hello"}
+tuple_size({:ok, "hello"})
+tuple = {:ok, "hello"}
+elem(tuple, 1)
+tuple_size(tuple)
+tuple_2 = put_elem(tuple, 1, "world")
 ```
 
-```
+Lists are returned when the number of elements returned may vary, on the other hand, tuples have a fixed size.
+
+```elixir
+String.split("Hello world")
+String.split("hello beautiful world")
+String.split_at("hello beautiful world", 3)
+String.split_at("hello beautiful world", -4)
 ```
 
-```
+To retrieve a file
+```elixir
+Path.expand("", __DIR__)
+|> Path.join("simple.exs")
+|> File.read()
 ```
 
 ```
