@@ -200,7 +200,27 @@ Path.expand("", __DIR__)
 
 <div id="section4"></div>
 
+## Pattern matching
+
+```elixir
+x = 1
+1 = x
+# MatchError
+2 = x
+{a, b , c} = {:hello, "world", 42}
+a
+b
+c
+# MatchError
+{a, b, c} = [1, 2, 3]
+{:ok, result} = {:ok, 42}
+result
 ```
+
+pin operator (^)
+```elixir
+x = 1
+^x = 2
 ```
 
 <div id="section5"></div>
