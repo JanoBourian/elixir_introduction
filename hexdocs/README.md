@@ -36,6 +36,7 @@ Modules https://hexdocs.pm/elixir/1.16.1/api-reference.html#modules
 
 ```bash
 docker run -it -v /home/ec2-user/environment/elixir_introduction/hexdocs:/app/data --rm elixir bash
+docker run -it --rm elixir bash
 ```
 <div id="section1"></div>
 
@@ -305,7 +306,47 @@ end
 
 <div id="section6"></div>
 
+## Anonymous functions
+
+```elixir
+add = fn(a, b) -> a + b end
+add.(1, 2)
+is_function(add)
+is_function(add, 2)
+is_function(add, 1)
 ```
+
+### Closures
+
+```elixir
+double = fn a -> add.(a, a) end
+double.(2)
+```
+
+### Clauses and guards
+
+```elixir
+f = fn
+  x, y when x > 0 -> x + y
+  x, y -> x * y
+end
+f.(1, 2)
+```
+
+### The capture operator
+
+```elixir
+fun = &is_atom/1
+fun.(:hello)
+fun.(123)
+fun = &String.length/1
+fun.("hello")
+add = &+/2
+add.(1, 2)
+fun = fn (a, b, c) -> a + b + c end
+fun.(1, 2, 3)
+fun = &(&1 + &2 + &3)
+fun.(1, 2, 3)
 ```
 
 <div id="section7"></div>
