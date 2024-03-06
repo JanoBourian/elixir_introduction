@@ -366,8 +366,94 @@ inspect(heartbeats_per_minute, charlists: :as_list)
 
 <div id="section8"></div>
 
+## Keyword lists and maps
+
+Keyword lists are not good for pattern matching.
+Keyword is the module of this kind of structure
+
+### Keyword lists
+
+```elixir
+String.split("1 2 3", " ")
+String.split("1  2  3", " ")
+String.split("1  2  3", " ", [trim: true])
+[{:trim, true}] == [trim: true]
+list = [a: 1, b: 2]
+list ++ [c: 3]
+[a: 0] ++ list
+list[:a]
+list[:c]
 ```
+
+Ecto example
+```elixir
+query = 
+  from w in Weather,
+  where: w.prcp > 0,
+  where: w.temp < 20,
+  select: w
 ```
+
+### do-blocks and keywords
+
+```elixir
+if true do
+  "This will be seen"
+else
+  "This won't"
+end
+
+if true, do: "This will be seen", else: "This won't"
+```
+
+### Maps
+
+* Maps are the "go to" data structure in Elixir
+* An empty map matches all maps
+* Maps allow any value as a key
+* Maps' keys do not follow any ordering
+* Map is its module
+
+```elixir
+map = %{:a => 1, :b => 2}
+map[:a]
+map[:b]
+map[:c]
+Map.get(map, :a)
+Map.put(map, :c, 3)
+Map.to_list(map)
+```
+
+Some operations
+
+```elixir
+map = %{:name => "John", :age => 23}
+map = %{name: "John", age: 23}
+map.name
+map.age
+# Update keys
+%{ map | name: "Mary"}
+```
+
+Nested operations
+
+```elixir
+users = [
+  john: %{name: "John", age: 27, languages: ["Erlang", "Ruby", "Elixir"]},
+  mary: %{name: "Mary", age: 29, languages: ["Elixir", "F#", "Clojure"]}
+]
+users[:john].age
+users = put_in users[:john].age, 31
+users = update_in users[:mary].languages, fn languages -> List.delete(languages, "Clojure") end
+```
+
+Modules to review:
+* put_in/2
+* update_in/2
+* get_and_update_in/2
+* put_in/3
+* update_in/3
+* get_and_update_in/3
 
 <div id="section9"></div>
 
