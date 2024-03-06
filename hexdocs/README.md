@@ -351,7 +351,17 @@ fun.(1, 2, 3)
 
 <div id="section7"></div>
 
-```
+## Binaries, strings, and charlists
+
+```elixir
+String.codepoints("👩‍🚒")
+String.graphemes("👩‍🚒")
+String.length("👩‍🚒")
+<<0::1, 0::1, 1::1, 1::1>> == <<3::4>>
+<<head, rest::binary>> = "banana"
+<<x::utf8, rest::binary>> = "über"
+heartbeats_per_minute = [99, 97, 116]
+inspect(heartbeats_per_minute, charlists: :as_list)
 ```
 
 <div id="section8"></div>
