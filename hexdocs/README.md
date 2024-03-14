@@ -458,166 +458,239 @@ Modules to review:
 
 <div id="section9"></div>
 
+## Modules and functions
+
+Create file `math.ex` and compile it using `elixirc math.ex` and it generates `Elixir.Math.beam`, it file contains the bytecode for the defined module.
+
+```elixir
+defmodule Math do
+  def sum(a, b) do
+    a + b
+  end
+end
+
 ```
+
+### Scripting mode
+
+`defp` prefix is used for private functions
+
+```elixir
+defmodule Math do
+  def sum(a, b) do
+    do_sum(a, b)
+  end
+
+  defp do_sum(a, b) do
+    a + b
+  end
+
+  def zero?(0), do: true
+
+  def zero?(x) when is_integer(x), do: false
+
+end
+
+IO.puts Math.sum(1, 2)
+IO.puts Math.zero?(0)
+IO.puts Math.zero?(1)
+# IO.puts Math.zero?(1.0) #=> Error
+# IO.puts Math.zero?(1.5) #=> Error
+
+```
+
+### Default arguments
+
+```elixir
+defmodule Concat do
+  def join(a, b, sep \\ " ") do
+    a <> sep <> b
+  end
+end
+
+IO.puts Concat.join("Hello", "world")
+IO.puts Concat.join("Hello", "world", "-")
+
+```
+
+Head functions declarating default parameters
+
+```elixir
+defmodule Concat do
+  def join(a, b \\ nil, sep \\ " ")
+
+  def join(a, b, _sep) when is_nil(b) do
+    a
+  end
+
+  def join(a, b, sep) do
+    a <> sep <> b
+  end
+end
+
+IO.puts Concat.join("Hello", "world")
+IO.puts Concat.join("Hello", "world", "-")
+IO.puts Concat.join("Hello")
+
 ```
 
 <div id="section10"></div>
 
-```
+```elixir
 ```
 
 <div id="section11"></div>
 
-```
+```elixir
 ```
 
 <div id="section12"></div>
 
-```
+```elixir
 ```
 
 <div id="section13"></div>
 
-```
+```elixir
 ```
 
 <div id="section14"></div>
 
-```
+```elixir
 ```
 
 <div id="section15"></div>
 
-```
+```elixir
 ```
 
 <div id="section16"></div>
 
-```
+```elixir
 ```
 
 <div id="section17"></div>
 
-```
+```elixir
 ```
 
 <div id="section18"></div>
 
-```
+```elixir
 ```
 
 <div id="section19"></div>
 
-```
+```elixir
 ```
 
 <div id="section20"></div>
 
-```
+```elixir
 ```
 
 <div id="section21"></div>
 
-```
+```elixir
 ```
 
 <div id="section22"></div>
 
-```
+```elixir
 ```
 
 <div id="section23"></div>
 
-```
-```
-
-
-```
+```elixir
 ```
 
-```
+
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
-```
-
-```
+```elixir
 ```
 
-```
+```elixir
 ```
 
+```elixir
 ```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
 ```
