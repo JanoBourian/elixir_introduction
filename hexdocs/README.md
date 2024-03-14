@@ -643,7 +643,64 @@ Enum.take(stream, 10)
 
 <div id="section12"></div>
 
+## Processes
+
+Important functions `spawn()`, `Process.alive?()`, `self()`, `flush()`
+
 ```elixir
+pid = spawn(fn -> 1+ 2 end)
+IO.puts Process.alive?(pid)
+self()
+IO.puts Process.alive?(self())
+
+### Sending and receiving messages
+send(self(), {:hello, "world"})
+receive do
+  {:hello, msg} -> msg
+  {_, _msg} -> "won't mathc"
+end
+
+receive do
+  {:hello, msg} -> msg
+after
+  3_000 -> "nothing after 1 second"
+end
+
+parent = self()
+spawn(fn -> send(parent, {:hello, self()}) end)
+receive do
+  {:hello, pid} -> "Got hello from #{inspect pid}"
+end
+```
+
+### State
+
+```elixir
+defmodule KV do
+  def start_link do
+    Task.start_link(fn -> loop(%{}) end)
+  end
+  def loop(map) do
+    receive do
+      {:get, key, caller} ->
+        send(caller, Map.get(map, key))
+        loop(map)
+      {:put, key, value} ->
+        loop(Map.put(map, key, value))
+    end
+  end
+end
+
+```
+
+### Agents
+
+Agents are a abstraction around state
+
+```elixir
+{:ok, pid} = Agent.start_link(fn -> %{} end)
+Agent.update(pid, fn map -> Map.put(map, :hello, :world) end)
+Agent.get(pid, fn map -> Map.get(map, :hello) end)
 ```
 
 <div id="section13"></div>
