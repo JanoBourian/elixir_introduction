@@ -17,7 +17,18 @@
 
 <div id="section1"></div>
 
-```
+## Introduction to Mix
+
+Code for this project: https://github.com/josevalim/kv_umbrella
+
+```bash
+mix new kv --module KV
+cd kv
+mix compile
+mix test
+mix format
+iex -S mix
+set "MIX_ENV=prod" && mix compile
 ```
 
 <div id="section2"></div>
