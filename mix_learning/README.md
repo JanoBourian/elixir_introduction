@@ -33,7 +33,22 @@ set "MIX_ENV=prod" && mix compile
 
 <div id="section2"></div>
 
+## Simple state management with agents
+
+* `Agents`: Simple wrappers around state.
+* `GenServer`: Generic Server that encapsulate state, provide sync and async calls, support code reloading, and more.
+* `Task`: Asynchronous units of computation that allow spawning a process and potentially retrieving its result at a later time.
+
+```elixir
+{:ok, agent} = Agent.start_link(fn -> [] end)
+Agent.update(agent, fn list -> ["eggs" | list] end)
+Agent.get(agent, fn list -> list end)
+Agent.stop(agent)
 ```
+
+```elixir
+Agent.get(bucket, &Map.get(&1, key)) 
+# Agent.get(bucket, fn dict -> Map.get(dict, key))
 ```
 
 <div id="section3"></div>
