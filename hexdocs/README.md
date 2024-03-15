@@ -760,7 +760,59 @@ end
 
 <div id="section15"></div>
 
+## Module attributes
+
+Common modules `@moduledoc`, `@doc`, `@spec`, and `@behaviour`
+
 ```elixir
+defmodule Math do
+  @moduledoc """
+  Provides math-realted functions.
+
+  ## Examples
+    iex> Math.sum(1, 2)
+    3
+
+  """
+
+  @doc """
+  Calculates the sum of two numbers
+  """
+  def sum(a, b), do: a + b
+
+end
+
+```
+
+```elixir
+defmodule MyApp.Status do
+  @service URI.parse("https://example.com")
+  def status(email) do
+    SomeHttpClient.get(@service)
+  end
+end
+
+defmodule MyApp.Status do
+  @service URI.parse("https://example.com")
+  def status(email) do
+    SomeHttpClient.get(%URI{
+      authority: "example.com",
+      host: "example.com",
+      port: 433,
+      scheme: "https"
+    })
+  end
+end
+
+## Instead of this
+def some_function, do: do_something_with(@example)
+def another_function, do: do_something_else_with(@example)
+
+## Use this
+def some_function, do: do_something_with(example())
+def another_function, do: do_something_else_with(example())
+defp example, do: @example
+
 ```
 
 <div id="section16"></div>
