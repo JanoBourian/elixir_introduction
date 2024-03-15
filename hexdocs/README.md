@@ -817,7 +817,29 @@ defp example, do: @example
 
 <div id="section16"></div>
 
+## Structs
+
 ```elixir
+defmodule User do
+  @enforce_keys [:make]
+  defstruct [:email, :make, name: "John", age: 27]
+end
+
+```
+
+```elixir
+john = %User{make: "make"}
+john.name
+john.age
+jane = %User{make: "make", name: "Jane"}
+jane.name
+jane.age
+anonymous = %User{john | name: "Anonymous"}
+anonymous.name
+anonymous.age
+
+%User{} = anonymous
+
 ```
 
 <div id="section17"></div>
