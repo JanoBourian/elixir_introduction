@@ -53,6 +53,8 @@ Agent.get(bucket, &Map.get(&1, key))
 
 <div id="section3"></div>
 
+## Client-server communication with GenServer
+
 ```
 ```
 

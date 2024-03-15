@@ -705,7 +705,29 @@ Agent.get(pid, fn map -> Map.get(map, :hello) end)
 
 <div id="section13"></div>
 
+## IO and the file system
+
+### IO
 ```elixir
+IO.puts("Hello")
+IO.gets("ready or not? ")
+```
+
+### File system
+```elixir
+{:ok, file} = File.open("test_file.txt", [:write])
+IO.binwrite(file, "world")
+File.close(file)
+{:ok, file} = File.read("test_file.txt")
+IO.puts(file)
+
+```
+
+### Path
+```elixir
+IO.puts Path.join("hello", "world")
+IO.puts Path.expand("~/hello")
+
 ```
 
 <div id="section14"></div>
