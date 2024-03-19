@@ -906,7 +906,23 @@ for n <- 0..10, rem(n, 3) == 0, do: n*n
 
 <div id="section19"></div>
 
+## Sigils 
+
+Sigils provide the foundation for extending the language with custom textual representations.
+
+### Calendar Sigils
+
 ```elixir
+# %Date{}
+d = ~D[2019-10-31]
+d.day
+# %Time{}
+t = ~T[23:00:07.0]
+t.second
+# %NaiveDateTime{}
+ndt = ~N[2019-10-31 23:00:07]
+# %DateTime{}
+dt = ~U[2019-10-31 19:59:03Z]
 ```
 
 <div id="section20"></div>
