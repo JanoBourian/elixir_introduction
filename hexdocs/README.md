@@ -844,7 +844,12 @@ anonymous.age
 
 <div id="section17"></div>
 
+## Protocols
+
+Protocols are a mechanism to achieve polymorphism
+
 ```elixir
+
 ```
 
 <div id="section18"></div>
