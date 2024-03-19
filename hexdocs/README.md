@@ -875,7 +875,33 @@ end
 
 <div id="section18"></div>
 
+## Comprehensions
+
 ```elixir
+for n <- [1, 2, 3, 4], do: n*n
+```
+
+### Generators
+
+```elixir
+for n <- 1..10, do: n*n
+for i <- [:a, :b, :c], j <- [1, 2], do: {i, j}
+```
+
+#### Bitstring generator
+
+```elixir
+pixels = <<213, 45, 132, 64, 76, 32, 76, 0, 0, 234, 32, 15>>
+for <<r::8, g::8, b::8 <- pixels>>, do: {r, g, b}
+[{213, 45, 132}, {64, 76, 32}, {76, 0, 0}, {234, 32, 15}]
+```
+
+### Filters
+
+```elixir
+values = [good: 1, good: 2, bad: 3, good: 4]
+for {:good, n} <- values, do: n*n
+for n <- 0..10, rem(n, 3) == 0, do: n*n
 ```
 
 <div id="section19"></div>
