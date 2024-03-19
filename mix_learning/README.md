@@ -104,7 +104,12 @@ end
 
 ## Client-server communication with GenServer
 
+We can name a process
+
 ```elixir
+Agent.start_link(fn -> %{} end, name: :shopping)
+KV.Bucket.put(:shopping, "milk", 1)
+KV.Bucket.get(:shopping, "milk")
 ```
 
 <div id="section4"></div>
