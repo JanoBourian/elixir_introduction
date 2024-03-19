@@ -55,46 +55,46 @@ Agent.get(bucket, &Map.get(&1, key))
 
 ## Client-server communication with GenServer
 
-```
+```elixir
 ```
 
 <div id="section4"></div>
 
-```
+```elixir
 ```
 
 <div id="section5"></div>
 
-```
+```elixir
 ```
 
 <div id="section6"></div>
 
-```
+```elixir
 ```
 
 <div id="section7"></div>
 
-```
+```elixir
 ```
 
 <div id="section8"></div>
 
-```
+```elixir
 ```
 
 <div id="section9"></div>
 
-```
+```elixir
 ```
 
 <div id="section10"></div>
 
-```
+```elixir
 ```
 
 <div id="section11"></div>
 
-```
+```elixir
 ```
 

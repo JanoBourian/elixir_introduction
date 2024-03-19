@@ -1078,92 +1078,24 @@ String.first("Hello")
 ```
 
 <div id="section24"></div>
+
+## Debugging 
+
+`IO.inspect()`
+
 ```elixir
+(1..10)
+|> IO.inspect()
+|> Enum.map(fn x -> x * 2 end)
+|> IO.inspect()
+|> Enum.sum()
+|> IO.inspect()
 ```
 
 ```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
-```
-
-```elixir
+[1, 2, 3]
+|> IO.inspect(label: "before")
+|> Enum.map(&(&1 * 2))
+|> IO.inspect(label: "after")
+|> Enum.sum
 ```
