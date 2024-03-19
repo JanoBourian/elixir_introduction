@@ -1055,7 +1055,10 @@ end
 
 <div id="section22"></div>
 
+## Optional syntax sheet
+
 ```elixir
+if true, do: :this, else: :that
 ```
 
 <div id="section23"></div>
