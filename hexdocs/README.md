@@ -1063,7 +1063,18 @@ if true, do: :this, else: :that
 
 <div id="section23"></div>
 
+## Erlang libraries
+
 ```elixir
+String.first("Hello")
+:math
+:binary
+:crypto
+:digraph
+:ets
+:queue
+:rand
+:zip
 ```
 
 <div id="section24"></div>
