@@ -927,7 +927,99 @@ dt = ~U[2019-10-31 19:59:03Z]
 
 <div id="section20"></div>
 
+## try, catch, and rescue
+
+### Errors (exceptions)
 ```elixir
+raise "oops"
+raise ArgumentError, message: "invalid argument foo"
+```
+
+```elixir
+defmodule MyError do
+  defexception message: "default message"
+end
+# raise MyError
+# raise MyError, message: "custom message"
+```
+
+```elixir
+try do
+  raise "oops"
+rescue
+  e in RuntimeError -> e
+end
+# %RuntimeError{message: "oops"}
+```
+
+```elixir
+try do
+  raise "oops"
+rescue
+  RuntimeError -> "Error!"
+end
+# "Error!"
+```
+
+### Throws
+```elixir
+try do
+  Enum.each(-50..50, fn x ->
+    if rem(x, 13) == 0, do: throw(x)
+  end)
+  "Got nothing"
+catch
+  x -> "Got #{x}"
+end
+```
+
+### Exits
+```elixir
+try do
+  exit("I am exiting")
+catch
+  :exit, _ -> "not really"
+end
+```
+
+### After
+```elixir
+{:ok, file} = File.open("sample", [:utf8, :write])
+try do
+  IO.write(file, "olá")
+  raise "oops, something went wrong"
+after
+  File.close(file)
+end
+```
+
+```elixir
+defmodule RunAfter do
+  def without_even_trying do
+    raise "oops"
+  after
+    IO.puts "cleaning up!"
+  end
+end
+RunAfter.without_even_trying
+```
+
+### Else
+```elixir
+x = 2
+# 2
+try do
+  1 / x
+rescue
+  ArithmeticError ->
+    :infinity
+else
+  y when y < 1 and y > -1 ->
+    :small
+  _ ->
+    :large
+end
+# :small
 ```
 
 <div id="section21"></div>
