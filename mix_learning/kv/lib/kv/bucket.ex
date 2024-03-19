@@ -28,6 +28,7 @@ defmodule KV.Bucket do
   Returns the current value of `key`, if `key` exists.
   """
   def delete(bucket, key) do
+    Process.sleep(1000)
     Agent.get_and_update(bucket, &Map.pop(&1, key))
   end
 end
