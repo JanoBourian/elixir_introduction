@@ -54,6 +54,12 @@ elixir lib/servy.ex
 If you want to have available your scripts in the interactive shell you can code:
 
 ```bash
+iex # Start iex console
+c "lib/rabbit.ex" # Compile module
+r Rabbit # Recompile module
+```
+
+```bash
 iex -S mix
 c "lib/servy.ex"
 iex lib/servy.ex
