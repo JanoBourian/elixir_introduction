@@ -119,6 +119,29 @@ IO.puts response
 ## 4.- Pattern Matching
 
 ```elixir
+request = """
+GET /wildthings HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+
+h String.split/2 # Tab to show more information
+
+# First way
+lines = String.split(request, "\n")
+first_line = List.first(lines)
+
+# Second way
+first_line = request |> String.split("\n") |> List.first
+parts = String.split(first_line, " ")
+Enum.at(parts, 0)
+a = 1
+^a = 1
+```
+
+```elixir
 iex -S mix
 h String.split/2
 request = Servy.Handler.handle("")
