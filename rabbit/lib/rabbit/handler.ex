@@ -3,6 +3,9 @@ defmodule Rabbit.Handler do
 
   @pages_path Path.expand("../../pages", __DIR__)
 
+  import Rabbit.Plugins, only: [rewrite_path: 1, log: 1, track: 1]
+  import Rabbit.Parser, only: [parse: 1]
+
   @doc "Transform the request into a response."
   def handle(request) do
      request
@@ -12,36 +15,6 @@ defmodule Rabbit.Handler do
     |> route
     |> track
     |> format_response
-  end
-
-  @doc "Logs 404 request"
-  def track(%{ status: 404, path: path} = conv) do
-    IO.puts("Warning #{path} is on the loose!")
-    conv
-  end
-
-  def track(conv), do: conv
-
-  def rewrite_path(%{path: "/wildlife"} = conv) do
-    %{ conv | path: "/wildthings"}
-  end
-
-  def rewrite_path(conv), do: conv
-
-  def log(conv), do: IO.inspect(conv)
-
-  def parse(request) do
-    # TODO: Parse the request string into a map:
-    [method, path, _] =
-      request
-      |> String.split("\n")
-      |> List.first()
-      |> String.split(" ")
-    %{ method: method,
-      path: path,
-      resp_body: "",
-      status: nil
-    }
   end
 
   def handle_file({:ok, content}, conv) do
