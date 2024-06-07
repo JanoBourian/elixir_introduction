@@ -135,14 +135,33 @@ end
 
 ```
 
+## Serving files
 
 ```elixir
+# Tuples
+{:ok, binary}
+{:error, reason}
+```
+
+```elixir
+iex
+h File.read
+h Path.expand
+h Path.join
 ```
 
 
 ```elixir
 ```
 
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
 
 ```elixir
 ```
