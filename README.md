@@ -57,3 +57,74 @@ To recompile certain files (r + module name)
 ```bash
 r Servy
 ```
+
+# Key concepts
+
+## Module and function structure
+
+```elixir
+defmodule Rabbit do
+
+    def say_hello(name) do
+        IO.puts("Hello #{name}")
+    end
+
+    def say_name(name), do: IO.inspect(name)
+
+    defp private_information do
+        IO.puts("Private information")
+    end
+end
+```
+
+## Pattern Matching
+
+```elixir
+defmodule Rabbit do
+
+    def decode_information(information) do
+        [name, age, _]  =
+            information
+            |> String.split("\n")
+            |> List.first
+            |> String.split(" ")
+    end
+end
+```
+
+## Function Clauses
+
+```elixir
+defmodule Rabbit do
+
+    def start(request) do
+        request
+        |> parse
+    end
+
+    def parse(request), do: parse(request, request.method, request.path)
+
+    def parse(request, "GET", "/"), do: IO.inspect(request)
+
+    def parse(request, "POST", "/"), do: IO.inspect(request)
+
+    def parse(request, method, "/" <> path), do: IO.puts("Method #{method} not available in #{path} path!")
+
+end
+```
+
+
+```elixir
+```
+
+
+```elixir
+```
+
+
+```elixir
+```
+
+
+```elixir
+```
