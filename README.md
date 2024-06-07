@@ -113,8 +113,26 @@ defmodule Rabbit do
 end
 ```
 
+## Pattern matching maps
 
 ```elixir
+defmodule Rabbit do
+
+    def start(request) do
+        request
+        |> parse
+    end
+
+    def parse(request), do: parse(request, request.method, request.path)
+
+    def parse(%{method: "GET", path: "/"} = request), do: IO.inspect(request)
+
+    def parse(%{method: "POST", path: "/"} = request), do: IO.inspect(request)
+
+    def parse(%{method: method, path: "/" <> path} = request), do: IO.puts("Method #{method} not available in #{path} path!")
+
+end
+
 ```
 
 
