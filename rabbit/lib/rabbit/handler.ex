@@ -47,6 +47,25 @@ defmodule Rabbit.Handler do
   #   route(conv, conv.method, conv.path)
   # end
 
+  def handle_file({:ok, content}, conv) do
+    %{ conv | status: 200, resp_body: content}
+  end
+
+  def handle_file({:error, :enoent}, conv) do
+    %{ conv | status: 400, resp_body: "File not found"}
+  end
+
+  def handle_file({:error, reason}, conv) do
+    %{ conv | status: 500, resp_body: "File error #{reason}"}
+  end
+
+  def route(%{method: "GET", path: "/about"} = conv) do
+    Path.expand("../../pages", __DIR__)
+    |> Path.join("about.html")
+    |> File.read()
+    |> handle_file(conv)
+  end
+
   def route(%{method: "GET", path: "/wildthings"} = conv) do
     %{ conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
@@ -154,6 +173,20 @@ IO.puts(response)
 # Request for /wildlife
 request = """
 GET /wildlife HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+
+response = Rabbit.Handler.handle(request)
+
+IO.puts(response)
+
+
+# Request for /about
+request = """
+GET /about HTTP/1.1
 Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
