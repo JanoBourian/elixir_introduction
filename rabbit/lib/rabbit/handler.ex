@@ -1,10 +1,11 @@
 defmodule Rabbit.Handler do
-  def handle(request) do
-    # conv = parse(request)
-    # conv = route(conv)
-    # format_response(conv)
+  @moduledoc "Handles HTTP requests."
 
-    request
+  @pages_path Path.expand("../../pages", __DIR__)
+
+  @doc "Transform the request into a response."
+  def handle(request) do
+     request
     |> parse
     |> rewrite_path
     |> log
@@ -13,6 +14,7 @@ defmodule Rabbit.Handler do
     |> format_response
   end
 
+  @doc "Logs 404 request"
   def track(%{ status: 404, path: path} = conv) do
     IO.puts("Warning #{path} is on the loose!")
     conv
@@ -42,11 +44,6 @@ defmodule Rabbit.Handler do
     }
   end
 
-  # def route(conv) do
-  #   # TODO: Create a new map that also has the response body:
-  #   route(conv, conv.method, conv.path)
-  # end
-
   def handle_file({:ok, content}, conv) do
     %{ conv | status: 200, resp_body: content}
   end
@@ -60,7 +57,7 @@ defmodule Rabbit.Handler do
   end
 
   def route(%{method: "GET", path: "/about"} = conv) do
-    Path.expand("../../pages", __DIR__)
+    @pages_path
     |> Path.join("about.html")
     |> File.read()
     |> handle_file(conv)
