@@ -150,8 +150,19 @@ h Path.expand
 h Path.join
 ```
 
+## Module attributes
 
 ```elixir
+defmodule Rabbit do
+    @moduledoc "Handles HTTP requests."
+
+    @pages_path Path.expand("../../pages", __DIR__)
+
+    @doc "Transform the request into a response."
+    def function(information) do
+        IO.puts(information)
+    end
+end
 ```
 
 ```elixir
