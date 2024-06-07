@@ -6,10 +6,25 @@ defmodule Rabbit.Handler do
 
     request
     |> parse
+    |> rewrite_path
     |> log
     |> route
+    |> track
     |> format_response
   end
+
+  def track(%{ status: 404, path: path} = conv) do
+    IO.puts("Warning #{path} is on the loose!")
+    conv
+  end
+
+  def track(conv), do: conv
+
+  def rewrite_path(%{path: "/wildlife"} = conv) do
+    %{ conv | path: "/wildthings"}
+  end
+
+  def rewrite_path(conv), do: conv
 
   def log(conv), do: IO.inspect(conv)
 
@@ -27,24 +42,24 @@ defmodule Rabbit.Handler do
     }
   end
 
-  def route(conv) do
-    # TODO: Create a new map that also has the response body:
-    route(conv, conv.method, conv.path)
-  end
+  # def route(conv) do
+  #   # TODO: Create a new map that also has the response body:
+  #   route(conv, conv.method, conv.path)
+  # end
 
-  def route(conv, "GET", "/wildthings") do
+  def route(%{method: "GET", path: "/wildthings"} = conv) do
     %{ conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
 
-  def route(conv, "GET", "/bears") do
+  def route(%{method: "GET", path: "/bears"} = conv) do
     %{ conv | status: 200, resp_body: "Teddy, Smokey, Paddington"}
   end
 
-  def route(conv, "GET", "/bears/" <> id) do
+  def route(%{method: "GET", path: "/bears/" <> id} = conv) do
     %{ conv | status: 200, resp_body: "Bear #{id}"}
   end
 
-  def route(conv, _method, path) do
+  def route(%{path: path} = conv) do
     %{conv | status: 404, resp_body: "No #{path} here!"}
   end
 
@@ -126,6 +141,19 @@ IO.puts(response)
 # Request for bears with long path after bears
 request = """
 GET /bears/long-path HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
+
+response = Rabbit.Handler.handle(request)
+
+IO.puts(response)
+
+# Request for /wildlife
+request = """
+GET /wildlife HTTP/1.1
 Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
