@@ -152,6 +152,8 @@ h Path.join
 
 ## Module attributes
 
+Module docs, functions docs and constants
+
 ```elixir
 defmodule Rabbit do
     @moduledoc "Handles HTTP requests."
@@ -161,6 +163,11 @@ defmodule Rabbit do
     @doc "Transform the request into a response."
     def function(information) do
         IO.puts(information)
+    end
+
+    @doc "IO puts a constant"
+    def print_constant do
+        IO.puts(@pages_path)
     end
 end
 ```
