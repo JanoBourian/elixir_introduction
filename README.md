@@ -171,6 +171,44 @@ defmodule Rabbit do
     end
 end
 ```
+## Modeling with structs
+
+How to define a struct
+
+```elixir
+defmodule Rabbit.Conv do
+  defstruct method: "", path: "", resp_body: "", status: nil
+end
+```
+
+How to use and update a struct
+```elixir
+conv = %Rabbit.Conv{}
+conv = %Rabbit.Conv{method: "GET", path: "/bears"}
+conv = %{ conv | status: 200}
+```
+
+Alias
+```elixir
+alias Rabbit.Conv, as: Conv
+# But you can use the last part of the module
+alias Rabbit.Conv # Conv
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
 
 ```elixir
 ```
