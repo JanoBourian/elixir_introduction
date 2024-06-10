@@ -1,4 +1,7 @@
 defmodule Rabbit.Parser do
+
+  alias Rabbit.Conv
+
   def parse(request) do
     # TODO: Parse the request string into a map:
     [method, path, _] =
@@ -6,10 +9,8 @@ defmodule Rabbit.Parser do
       |> String.split("\n")
       |> List.first()
       |> String.split(" ")
-    %{ method: method,
-      path: path,
-      resp_body: "",
-      status: nil
-    }
+    %Conv{
+      method: method,
+      path: path}
   end
 end
