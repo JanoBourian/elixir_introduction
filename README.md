@@ -195,7 +195,12 @@ alias Rabbit.Conv, as: Conv
 alias Rabbit.Conv # Conv
 ```
 
+## Matching Heads and Tails
+
 ```elixir
+[head | tail] = [1, 2, 3, 4, 5]
+head
+tail
 ```
 
 ```elixir
