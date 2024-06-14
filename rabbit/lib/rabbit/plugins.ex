@@ -3,7 +3,7 @@ defmodule Rabbit.Plugins do
   alias Rabbit.Conv
 
   @doc "Logs 404 request"
-  def track(%Conv{ status: 404, path: path} = conv) do
+  def track(%Conv{status: 404, path: path} = conv) do
     IO.puts("Warning #{path} is on the loose!")
     conv
   end
@@ -11,7 +11,7 @@ defmodule Rabbit.Plugins do
   def track(%Conv{} = conv), do: conv
 
   def rewrite_path(%Conv{path: "/wildlife"} = conv) do
-    %{ conv | path: "/wildthings"}
+    %{conv | path: "/wildthings"}
   end
 
   def rewrite_path(%Conv{} = conv), do: conv
