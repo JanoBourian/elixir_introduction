@@ -125,19 +125,6 @@ response = Rabbit.Handler.handle(request)
 
 IO.puts(response)
 
-# Request for bears with long path after bears
-request = """
-GET /bears/long-path HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
 # Request for /wildlife
 request = """
 GET /wildlife HTTP/1.1
@@ -176,7 +163,6 @@ Content-Length: 21
 
 name=Baloo&type=Brown
 """
-
 
 response = Rabbit.Handler.handle(request)
 
