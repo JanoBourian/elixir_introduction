@@ -230,11 +230,82 @@ h Enum
 # each
 # filter
 # find
+# join
 # map
 # reduce
 # reject
+# sort
 Rabbit.Wildthings.list_bears()
 Enum.map(bears, fn(bear) -> bear end)
+```
+
+## Anonymous functions
+```elixir
+phrases = ["lions", "tigers", "bears", "oh my"]
+Enum.map(phrases, fn(x) -> String.upcase(x) end)
+Enum.map(phrases, &String.upcase(&1))
+```
+
+An example before and after
+
+Before
+```elixir
+def index(conv) do
+    # bears = Wildthings.list_bears()
+    items =
+      Wildthings.list_bears()
+      |> Enum.filter(fn(bear) -> Bear.is_grizzly(bear) end)
+      |> Enum.sort(fn(bear1, bear2) -> Bear.order_asc_by_name(bear1, bear2) end)
+      |> Enum.map(fn(bear) -> bear_item(bear) end)
+      |> Enum.join()
+
+    %{conv | status: 200, resp_body: "<ul>#{items}</ul>" }
+  end
+```
+
+After
+```elixir
+def index(conv) do
+    # bears = Wildthings.list_bears()
+    items =
+      Wildthings.list_bears()
+      |> Enum.filter(&Bear.is_grizzly(&1))
+      |> Enum.sort(&Bear.order_asc_by_name(&1, &2))
+      |> Enum.map(&bear_item(&1))
+      |> Enum.join()
+
+    %{conv | status: 200, resp_body: "<ul>#{items}</ul>" }
+  end
+```
+
+But, we have one option more
+```elixir
+def index(conv) do
+    # bears = Wildthings.list_bears()
+    items =
+      Wildthings.list_bears()
+      |> Enum.filter(&Bear.is_grizzly/1)
+      |> Enum.sort(&Bear.order_asc_by_name/2)
+      |> Enum.map(&bear_item/1)
+      |> Enum.join()
+
+    %{conv | status: 200, resp_body: "<ul>#{items}</ul>" }
+  end
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
+```
+
+```elixir
 ```
 
 ```elixir

@@ -7,9 +7,9 @@ defmodule Rabbit.BearController do
     # bears = Wildthings.list_bears()
     items =
       Wildthings.list_bears()
-      |> Enum.filter(&Bear.is_grizzly(&1))
-      |> Enum.sort(&Bear.order_asc_by_name(&1, &2))
-      |> Enum.map(&bear_item(&1))
+      |> Enum.filter(&Bear.is_grizzly/1)
+      |> Enum.sort(&Bear.order_asc_by_name/2)
+      |> Enum.map(&bear_item/1)
       |> Enum.join()
 
     %{conv | status: 200, resp_body: "<ul>#{items}</ul>" }
