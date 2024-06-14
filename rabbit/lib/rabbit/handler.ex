@@ -178,8 +178,6 @@ name=Baloo&type=Brown
 """
 
 
-
-
 response = Rabbit.Handler.handle(request)
 
 IO.puts(response)

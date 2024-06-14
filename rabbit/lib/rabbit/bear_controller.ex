@@ -3,8 +3,11 @@ defmodule Rabbit.BearController do
   alias Rabbit.Wildthings
 
   def index(conv) do
-    bears = Wildthings.list_bears()
-    %{conv | status: 200, resp_body: "<ul><li>Name</li></ul>"}
+    # bears = Wildthings.list_bears()
+    html_text =
+      Wildthings.list_bears()
+      |> Enum.map(fn(bear) -> "<li> #{bear.name} </li>" end)
+    %{conv | status: 200, resp_body: "<ul> #{html_text} </ul>" }
   end
 
   def show(conv, %{"id" => id}) do
