@@ -221,7 +221,20 @@ Recursion.loopy([1, 2, 3, 4, 5])
 
 ```
 
+## Slicing and dicing, Enum module
+
+Enum module
+
 ```elixir
+h Enum
+# each
+# filter
+# find
+# map
+# reduce
+# reject
+Rabbit.Wildthings.list_bears()
+Enum.map(bears, fn(bear) -> bear end)
 ```
 
 ```elixir
