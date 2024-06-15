@@ -293,7 +293,13 @@ def index(conv) do
   end
 ```
 
+## Comprenhensions | embeded elixir | templates
+
+The extension for embeded elixir templates is __.eex__ and the module to work with templates is __EEx__
+
 ```elixir
+Enum.map([1, 2, 3], fn(x) -> x*3 end)
+for x <- [1, 2, 3], do: x*3
 ```
 
 ```elixir
