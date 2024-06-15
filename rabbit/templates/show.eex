@@ -1,0 +1,4 @@
+<h1> Show <%= bear.name %> - <%= bear.type %> </h1>
+<p>
+    Is <%= bear.name %> hibernating? <strong><%= bear.hibernating %></strong>
+</p>
