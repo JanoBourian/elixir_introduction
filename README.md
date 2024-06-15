@@ -302,6 +302,14 @@ Enum.map([1, 2, 3], fn(x) -> x*3 end)
 for x <- [1, 2, 3], do: x*3
 ```
 
+## Phoenix Framework
+
+```cmd
+mix phx.new maxine
+cd maxine
+mix phx.gen.html Wildthings Bear bears name:string type:string hibernating:boolean
+```
+
 ```elixir
 ```
 
