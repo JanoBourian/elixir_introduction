@@ -31,7 +31,7 @@ defmodule Rabbit.Parser do
       headers: headers}
   end
 
-  defp parse_headers([head | tail], headers) do
+  def parse_headers([head | tail], headers) do
     [key, value] =
       head
       |> String.split(": ")
@@ -40,12 +40,23 @@ defmodule Rabbit.Parser do
     parse_headers(tail, headers)
   end
 
-  defp parse_headers([], headers), do: headers
+  def parse_headers([], headers), do: headers
 
-  defp parse_params("application/x-www-form-urlencoded\r", params_string) do
+  @doc """
+  Parses the given para string of the form `key1=value1&key2=value2`
+  into a map with corresponding keys and values
+
+  ## Examples
+      iex> params_string = "name=Baloo&type=Brown"
+      iex> Rabbit.Parser.parse_params("application/x-www-form-urlencoded\r", params_string)
+      %{"name" => "Baloo", "type" => "Brown"}
+      iex> Rabbit.Parser.parse_params("multipart/form-data\r", params_string)
+      %{}
+  """
+  def parse_params("application/x-www-form-urlencoded\r", params_string) do
     params_string |> String.trim() |> URI.decode_query()
   end
 
-  defp parse_params(_, _), do: %{}
+  def parse_params(_, _), do: %{}
 
 end

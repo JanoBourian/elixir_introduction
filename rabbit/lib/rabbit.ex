@@ -3,15 +3,6 @@ defmodule Rabbit do
   Documentation for `Rabbit`.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Rabbit.hello()
-      :world
-
-  """
   def hello(name) do
     "Howdy, #{name}!"
   end
