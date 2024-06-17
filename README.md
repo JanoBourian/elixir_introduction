@@ -310,10 +310,42 @@ cd maxine
 mix phx.gen.html Wildthings Bear bears name:string type:string hibernating:boolean
 ```
 
+## Test automation
+
 ```elixir
+# assert 1 + 1 == 2
+# refute 2 + 1 == 2
+defmodule ParserTest do
+  use ExUnit.Case
+  doctest Rabbit.Parser
+
+  alias Rabbit.Parser
+
+  test "parses a list of headers fields into a map" do
+    headers_lines = ["A: 1", "B: 2"]
+    headers = Parser.parse_headers(headers_lines, %{})
+    assert headers == %{"A" => "1", "B" => "2"}
+  end
+end
 ```
 
 ```elixir
+@doc """
+  Parses the given para string of the form `key1=value1&key2=value2`
+  into a map with corresponding keys and values
+
+  ## Examples
+      iex> params_string = "name=Baloo&type=Brown"
+      iex> Rabbit.Parser.parse_params("application/x-www-form-urlencoded\r", params_string)
+      %{"name" => "Baloo", "type" => "Brown"}
+      iex> iex> Rabbit.Parser.parse_params("multipart/form-data\r", params_string)
+      %{}
+  """
+  defp parse_params("application/x-www-form-urlencoded\r", params_string) do
+    params_string |> String.trim() |> URI.decode_query()
+  end
+
+  defp parse_params(_, _), do: %{}
 ```
 
 ```elixir
