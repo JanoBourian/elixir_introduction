@@ -348,6 +348,12 @@ end
   defp parse_params(_, _), do: %{}
 ```
 
+To execute test:
+
+```bash
+mix test
+```
+
 ```elixir
 ```
 

@@ -73,19 +73,6 @@ defmodule Rabbit.Handler do
 
 end
 
-# First request
-request = """
-GET /wildthings HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
 # Request with bears
 request = """
 GET /bears HTTP/1.1
@@ -99,46 +86,6 @@ response = Rabbit.Handler.handle(request)
 
 IO.puts(response)
 
-# Request for bigfoot
-request = """
-GET /bigfoot HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
-# Request for bears with id
-request = """
-GET /bears/1 HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
-# Request for /wildlife
-request = """
-GET /wildlife HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
-
 # Request for /about
 request = """
 GET /about HTTP/1.1
@@ -146,22 +93,6 @@ Host: example.com
 User-Agent: ExampleBrowser/1.0
 Accept: */*
 
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
-# POST request for head and tails
-request = """
-POST /bears HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 21
-
-name=Baloo&type=Brown
 """
 
 response = Rabbit.Handler.handle(request)
