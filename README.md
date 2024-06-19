@@ -354,10 +354,26 @@ To execute test:
 mix test
 ```
 
-```elixir
-```
+## Rendering JSON
+
+In mix.exs in dependencies function
 
 ```elixir
+{:poison, "~> 6.0"}
+```
+
+and run
+
+```bash
+mix deps
+mix deps.get
+```
+
+in elixir console
+
+```elixir
+bears = Rabbit.Wildthings.list_bears()
+Poison.encode!(bears)
 ```
 
 ```elixir

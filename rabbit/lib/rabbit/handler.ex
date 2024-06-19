@@ -43,6 +43,10 @@ defmodule Rabbit.Handler do
     %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
 
+  def route(%Conv{method: "GET", path: "/api/bears"} = conv) do
+    Rabbit.Api.BearController.index(conv)
+  end
+
   def route(%Conv{method: "GET", path: "/bears"} = conv) do
     BearController.index(conv)
   end
@@ -64,7 +68,7 @@ defmodule Rabbit.Handler do
   def format_response(%Conv{} = conv) do
     """
     HTTP/1.1 #{Conv.full_status(conv)}
-    Content-Type: text/html
+    Content-Type: #{conv.resp_content_type}
     Content-Length: #{String.length(conv.resp_body)}
 
     #{conv.resp_body}
