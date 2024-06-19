@@ -72,29 +72,3 @@ defmodule Rabbit.Handler do
   end
 
 end
-
-# Request with bears
-request = """
-GET /bears HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
-
-# Request for /about
-request = """
-GET /about HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Rabbit.Handler.handle(request)
-
-IO.puts(response)
