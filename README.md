@@ -376,6 +376,8 @@ bears = Rabbit.Wildthings.list_bears()
 Poison.encode!(bears)
 ```
 
+## Web Sockets
+
 ```elixir
 ```
 
