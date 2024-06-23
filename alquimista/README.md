@@ -41,6 +41,14 @@
     - ends_with?/2
     - starts_with?/2
     - contains/2
+- Kernel
+    - bit_size/1
+    - put_elem/3
+    - elem/2
+- Tuple
+    - append/2
+    - delete_at/2
+
 
 ## Modules that use Enumerable
 
