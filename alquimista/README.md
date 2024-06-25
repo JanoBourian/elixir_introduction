@@ -47,6 +47,8 @@
     - elem/2
     - is_map/1
     - map_size/1
+    - get_in/2,3
+    - put_in/3,4
 - Tuple
     - append/2
     - delete_at/2
@@ -56,7 +58,17 @@
     - keys/1
     - get/2
     - delete/2
-
+- MapSet
+    - new
+    - put/2
+    - member?/2
+    - delete/2
+    - union/2
+    - intersection/2
+    - difference/2
+    - equal?/2
+    - subset?/2
+    - disjoint?/2
 
 ## Modules that use Enumerable
 

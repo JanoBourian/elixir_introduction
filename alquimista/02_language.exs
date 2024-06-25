@@ -48,6 +48,13 @@ defmodule DataTypes do
     IO.puts(Map.get(map_value, :name))
     IO.inspect(Map.keys(map_value))
 
+    # Sets
+    set = MapSet.new
+    set = MapSet.put(set, "red")
+    IO.inspect(set)
+    set = MapSet.put(set, "blue")
+    IO.inspect(set)
+
     value
 
   end
