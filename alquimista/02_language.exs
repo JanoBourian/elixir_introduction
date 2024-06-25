@@ -55,6 +55,10 @@ defmodule DataTypes do
     set = MapSet.put(set, "blue")
     IO.inspect(set)
 
+    # Range
+    range_info = Range.new(1, 100)
+    IO.inspect(range_info)
+
     value
 
   end

@@ -10,6 +10,7 @@
     - uniq/1
     - find/2
     - with_index/1
+    - into/2
 - String
     - to_atom
 - Integer
@@ -49,6 +50,7 @@
     - map_size/1
     - get_in/2,3
     - put_in/3,4
+    - inspect/1
 - Tuple
     - append/2
     - delete_at/2
@@ -58,6 +60,7 @@
     - keys/1
     - get/2
     - delete/2
+    - to_list/1
 - MapSet
     - new
     - put/2
@@ -69,6 +72,8 @@
     - equal?/2
     - subset?/2
     - disjoint?/2
+- Range
+    - new/2
 
 ## Modules that use Enumerable
 
