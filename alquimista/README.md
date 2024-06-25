@@ -45,9 +45,17 @@
     - bit_size/1
     - put_elem/3
     - elem/2
+    - is_map/1
+    - map_size/1
 - Tuple
     - append/2
     - delete_at/2
+- Map
+    - put_new/3
+    - put/3
+    - keys/1
+    - get/2
+    - delete/2
 
 
 ## Modules that use Enumerable

@@ -34,6 +34,20 @@ defmodule DataTypes do
     final_user = Tuple.delete_at(user, 3)
     IO.inspect(final_user)
 
+    # Maps
+    map_value = %{:name => "John"}
+    IO.inspect(map_value)
+    map_value = %{ map_value | :name => "Max"}
+    IO.inspect(map_value)
+    map_value = Map.put_new(map_value, :age, 35)
+    IO.inspect(map_value)
+    map_value = Map.put(map_value, :name, "Maxima")
+    IO.inspect(map_value)
+    IO.puts(map_value[:name])
+    IO.puts(map_value.age)
+    IO.puts(Map.get(map_value, :name))
+    IO.inspect(Map.keys(map_value))
+
     value
 
   end
