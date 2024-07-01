@@ -12,6 +12,21 @@ defmodule Expressions do
   def text ~> sub do
     String.contains?(text, sub)
   end
+
+  def match_and_pipe(number) when is_number(number) do
+    result = number
+      |> Integer.to_string()
+      |> String.graphemes()
+      |> Enum.uniq()
+      |> Enum.sort()
+      IO.puts(result)
+  end
+
+  def match_and_pipe(_value), do: IO.puts("The argument should be a valid number")
+
 end
 
 Expressions.exp()
+
+Expressions.match_and_pipe(54541838879408)
+Expressions.match_and_pipe("random text")
