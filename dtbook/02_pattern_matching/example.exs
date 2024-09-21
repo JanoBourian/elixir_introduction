@@ -1,7 +1,8 @@
 defmodule Example do
   def pm do
-    list = [1, 2, 3]
-    [a, b, c] = list
+    a = 1
+    list = [1, 2, 3, 4]
+    [^a, b, c, _] = list
     IO.puts a
     IO.puts b
     IO.puts c
