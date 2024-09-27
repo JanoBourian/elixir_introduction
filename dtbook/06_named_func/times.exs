@@ -21,3 +21,19 @@ end
 Example.func("a", "b")
 Example.func("a", "b", "c")
 Example.func("a", "b", "c", "d")
+
+defmodule Chop do
+  def guess(number, a..b) when div(a + b, 2) == number do
+    IO.puts("#{number}")
+  end
+  
+  def guess(number, a..b) when div(a + b, 2) > number do
+    IO.puts("It is #{div(a + b, 2)}")
+    guess(number, a..div(a + b,2))
+  end
+  
+  def guess(number, a..b) when div(a + b, 2) < number do
+    IO.puts("It is #{div(a + b, 2)}")
+    guess(number, div(a + b,2)..b)
+  end
+end
